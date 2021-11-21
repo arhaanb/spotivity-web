@@ -1,4 +1,11 @@
 {
+	"github": {
+		"autoAlias": true,
+		"enabled": true,
+		"silent": true
+	},
+	"trailingSlash": false,
+	"public": false,
 	"headers": [
 		{
 			"source": "/api/(.*)",
