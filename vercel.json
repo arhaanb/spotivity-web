@@ -1,5 +1,5 @@
 {
-	"rewrites": [
+	"redirects": [
 		{
 			"source": "/:pathinfo*",
 			"destination": "https://arhaanbahadur.co/spotifyactivity"
