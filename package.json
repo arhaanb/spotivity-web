@@ -16,7 +16,6 @@
 		"mongoose": "^6.0.11",
 		"next": "latest",
 		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"swr": "^1.0.1"
+		"react-dom": "^17.0.2"
 	}
 }
