@@ -1,7 +1,7 @@
 {
 	"redirects": [
 		{
-			"source": "/:pathinfo*",
+			"source": "/",
 			"destination": "https://arhaanbahadur.co/spotifyactivity"
 		}
 	],
