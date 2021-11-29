@@ -1,10 +1,4 @@
 {
-	"redirects": [
-		{
-			"source": "/",
-			"destination": "https://arhaanbahadur.co/spotifyactivity"
-		}
-	],
 	"github": {
 		"autoAlias": true,
 		"enabled": true,
