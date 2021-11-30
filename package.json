@@ -13,6 +13,7 @@
 		"trailingComma": "none"
 	},
 	"dependencies": {
+		"axios": "^0.24.0",
 		"mongoose": "^6.0.11",
 		"next": "latest",
 		"react": "^17.0.2",

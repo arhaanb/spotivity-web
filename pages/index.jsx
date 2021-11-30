@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const Index = ({ pets }) => (
+const Index = ({}) => (
 	<>
 		<h1>Spotivity</h1>
 		<p>
