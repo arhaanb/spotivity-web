@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
-const Index = ({}) => (
+const Index = ({ }) => (
 	<>
-		<h1>Spotivity</h1>
-		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae adipisci
-			recusandae aperiam ducimus quae voluptatum maxime, commodi saepe
-			repellendus non. Assumenda iste laboriosam quod eveniet deleniti sapiente
-			sed expedita reprehenderit.
-		</p>
+		<div className="container">
+			<br />
+			<h3 className="zero">Spotivity</h3>
+			<p>
+				Check your Spotify friend activity on the go. Download now at <a href="https:////arhn.us/spotivity">arhn.us/spotivity</a>.
+			</p>
+		</div>
 	</>
 )
 
