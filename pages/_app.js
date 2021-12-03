@@ -1,18 +1,18 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import '../styles.css'
+import '../css/skeleton.css'
+import '../css/styles.css'
 
 function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<Head>
 				<title>Spotivity</title>
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 				<link
+					href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Manrope:wght@400;600;700&display=swap"
 					rel="stylesheet"
-					href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
-					integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
-					crossOrigin="anonymous"
-					referrerPolicy="no-referrer"
 				/>
 			</Head>
 

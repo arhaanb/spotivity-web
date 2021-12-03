@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: "Manrope";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+p {
+  opacity: 0.75;
+}
+
+.noselect, img, br {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.zero {
+  margin: 0;
+}
+
+.flexthing {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center
+}
+
+.userdata h1, .userdata h2, .userdata h3, .userdata h4, .userdata h5, .userdata h6 {
+  font-weight: 400;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.GFG {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 750px) {
+  .GFG {
+    display: grid;
+    grid-gap: 0.5em;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

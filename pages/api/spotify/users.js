@@ -14,11 +14,12 @@ export default async function handler(req, res) {
 		case 'POST':
 			try {
 				if (req?.body?.password == process?.env?.PASSWORD) {
-					User.find({}, { currentDisplayName: 1, username: 1, email: 1 }).then(
-						(user) => {
-							res.status(201).json({ success: true, message: user })
-						}
-					)
+					User.find(
+						{},
+						{ currentDisplayName: 1, username: 1, email: 1, createdAt: 1 }
+					).then((user) => {
+						res.status(201).json({ success: true, message: user })
+					})
 				} else {
 					res
 						.status(400)

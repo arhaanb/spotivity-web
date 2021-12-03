@@ -1,3 +1,3 @@
-# [Spotify Acitivity](https://arhaanbahadur.co/spotifyactivity)
+# [Spotivity](https://arhn.us/spotivity)
 
 > Check your friends' Spotify activity from your phone.
