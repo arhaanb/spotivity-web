@@ -8,7 +8,13 @@ export default async function handler(req, res) {
 
 	switch (method) {
 		case 'GET':
-			res.status(200).json({ success: true, message: 'Spotivity API' })
+			res
+				.status(200)
+				.json({
+					success: true,
+					message: 'Spotivity API',
+					home: 'https://spotivity.vercel.app'
+				})
 			break
 
 		case 'POST':
