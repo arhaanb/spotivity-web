@@ -193,6 +193,10 @@ button:hover, .button:hover {
   padding: 0.5em 0;
 }
 
+.footer h6 {
+  margin-bottom: 0.2em;
+}
+
 a {
   color: rgb(7, 161, 115);
   text-decoration: none;
@@ -202,10 +206,25 @@ a:hover {
   color: #222;
 }
 
+.brandimg {
+  width: 16em;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 750px) {
+  .brandimg {
+    width: 60%;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .block {
     height: auto;
     grid-column: span 6 / auto;
+  }
+
+  .brandimg {
+    margin-top: 40px;
   }
 
   .mainmockimg {

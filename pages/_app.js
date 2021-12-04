@@ -14,7 +14,11 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				<title>{title}</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
-				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin={true}
+				/>
 				<link
 					href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Manrope:wght@400;600;700&display=swap"
 					rel="stylesheet"
@@ -39,7 +43,7 @@ function MyApp({ Component, pageProps }) {
 				<meta property="og:image:alt" content={title} />
 				<meta property="og:image:width" content="1280" />
 				<meta property="og:image:height" content="720" />
-				<meta name="theme-color" content="#40E8D9" />
+				{/* <meta name="theme-color" content="#40E8D9" /> */}
 				<link rel="icon" href="/favicon.ico" type="image/ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />
 			</Head>

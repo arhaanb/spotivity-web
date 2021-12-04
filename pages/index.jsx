@@ -13,13 +13,13 @@ const Index = ({ }) => (
 		<section className="container" id="mainp">
 			<div className="row center">
 				<div className="flex-center">
-					<div style={{ width: '16em', marginTop: 25 }}>
+					<div className="brandimg">
 						<Image src={Brand} alt="" />
 					</div>
 				</div>
 				<div className="flex-center">
 					<div className="seven columns">
-						<h1 style={{ marginBottom: 5, textAlign: 'center', marginTop: 5 }}>See what your friends are listening to</h1>
+						<h1 style={{ marginBottom: 5, textAlign: 'center', marginTop: 0 }}>See what your friends are listening to</h1>
 					</div>
 					<div className="u-cf"></div>
 
