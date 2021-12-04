@@ -10,27 +10,16 @@ import Image from 'next/image'
 
 const Index = ({ }) => (
 	<>
-		{/* <div className="container">
-			<br />
-			<br />
-			<h3>Spotivity</h3>
-			<p>
-				Check your Spotify friend activity on the go. Download now at <a href="https:////arhn.us/spotivity">arhn.us/spotivity</a>.
-			</p>
-			<p>Admin panel available at <Link href="/users"><a>/users</a></Link>.</p>
-		</div> */}
 		<section className="container" id="mainp">
-
-			<br /><br />
 			<div className="row center">
 				<div className="flex-center">
-					<div style={{ width: '20em' }}>
+					<div style={{ width: '16em', marginTop: 25 }}>
 						<Image src={Brand} alt="" />
 					</div>
 				</div>
 				<div className="flex-center">
 					<div className="seven columns">
-						<h1 style={{ marginBottom: 5, textAlign: 'center' }}>See what your friends are listening to</h1>
+						<h1 style={{ marginBottom: 5, textAlign: 'center', marginTop: 5 }}>See what your friends are listening to</h1>
 					</div>
 					<div className="u-cf"></div>
 
@@ -70,6 +59,7 @@ const Index = ({ }) => (
 						src={Mock}
 						alt="Spotivity mockup"
 						draggable={false}
+						placeholder="blur"
 					/>
 				</div>
 				<div className="eight columns">
@@ -77,14 +67,12 @@ const Index = ({ }) => (
 					<h2 className="zero" style={{ marginBottom: 5 }}>Spotivity</h2>
 					<p>The app brings one of the most requested features of Spotify to your phone. You can now see what your friends are up to without having to use the desktop app. Built with React Native and Expo.</p>
 
-					<a target="_blank" href="//arhn.us/spotivity" style={{ textDecoration: 'none' }}>
-						<button>
-							<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
-								<Image src={Play} alt="" />
-							</div>
-							Play Store
-						</button>
-					</a>
+					<button onClick={() => window.open('https://arhn.us/spotivity')}>
+						<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
+							<Image src={Play} alt="" />
+						</div>
+						Play Store
+					</button>
 				</div>
 			</div>
 
@@ -93,8 +81,9 @@ const Index = ({ }) => (
 					<div style={{ width: '62%', marginBottom: 10 }}>
 						<Image
 							src={Yuh}
-							alt="Spotivity mockup"
+							alt="Grid of music artists"
 							draggable={false}
+							placeholder='blur'
 						/>
 					</div>
 				</div>
@@ -106,25 +95,14 @@ const Index = ({ }) => (
 				</p>
 
 				<div>
-					<a target="_blank" href="//arhn.us/spotivity" style={{ textDecoration: 'none' }}>
-						<button className='behance'>
-							<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
-								<Image src={Behance} alt="" />
-							</div>
-							Behance
-						</button>
-					</a>
+					<button className='behance' onClick={() => window.open('https://arhn.us/spot-design')}>
+						<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
+							<Image src={Behance} alt="" />
+						</div>
+						Behance
+					</button>
 				</div>
-				{/* <Image src={Brand} alt="" /> */}
 			</div>
-
-			{/* <div className="block size2">
-				<h2>I like dick</h2>
-			</div>
-
-			<div className="block size4">
-				<h2>pussy. money. weed.</h2>
-			</div> */}
 		</div>
 
 		<div className="maingrid">
@@ -160,8 +138,8 @@ const Index = ({ }) => (
 
 					<div className="four columns">
 						<h6>External</h6>
-						<p><a href="//arhn.us/spotivity" target="_blank">Google Play Store</a></p>
-						<p><a href="//arhn.us/spotivity" target="_blank">Behance</a></p>
+						<p><a href="https://arhn.us/spotivity" target="_blank">Google Play Store</a></p>
+						<p><a href="https://arhn.us/spot-design" target="_blank">Behance</a></p>
 					</div>
 				</div>
 			</div>
