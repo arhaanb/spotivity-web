@@ -19,12 +19,12 @@ const Index = ({ }) => (
 				</div>
 				<div className="flex-center">
 					<div className="seven columns">
-						<h1 style={{ marginBottom: 5, textAlign: 'center', marginTop: 0 }}>See what your friends are listening to</h1>
+						<h1 className="mainh1" style={{ marginBottom: 5, textAlign: 'center', marginTop: 0 }}>See what your friends are listening to</h1>
 					</div>
 					<div className="u-cf"></div>
 
 					<div className="five columns">
-						<p style={{ fontSize: '1.2em' }} className="center">Check your Spotify friend activity right from your phone with Spotivity.</p>
+						<p style={{ fontSize: '1.2em' }} className="center mainpara">Check your Spotify friend activity right from your phone with Spotivity.</p>
 					</div>
 					<div className="u-cf"></div>
 					<a target="_blank" href="//arhn.us/spotivity" style={{ textDecoration: 'none' }}>
@@ -54,7 +54,7 @@ const Index = ({ }) => (
 		<div className="maingrid">
 
 			<div className="block size4 extra" style={{ backgroundColor: '#F6F6F6', padding: '2em 4em 2em 4em' }}>
-				<div className="four columns" style={{ marginTop: 45 }}>
+				<div className="four columns cardmockup">
 					<Image
 						src={Mock}
 						alt="Spotivity mockup"
@@ -63,8 +63,10 @@ const Index = ({ }) => (
 					/>
 				</div>
 				<div className="eight columns">
-					<br /><br /><br />
-					<h2 className="zero" style={{ marginBottom: 5 }}>Spotivity</h2>
+					<br className="anti" />
+					<br className="anti" />
+					<br />
+					<h2 className="zero" style={{ marginBottom: 5, marginTop: 17 }}>Spotivity</h2>
 					<p>The app brings one of the most requested features of Spotify to your phone. You can now see what your friends are up to without having to use the desktop app. Built with React Native and Expo.</p>
 
 					<button onClick={() => window.open('https://arhn.us/spotivity')}>
@@ -87,7 +89,7 @@ const Index = ({ }) => (
 						/>
 					</div>
 				</div>
-				<h1 style={{ marginBottom: 7 }}>Design</h1>
+				<h2 style={{ marginBottom: 5, marginTop: 5 }}>Design</h2>
 				<p>
 					Check out the Behance project to find out the thought process behind the logo and app.
 					Also <a href="//arhaanbahadur.co/explore#contact" target="_blank">let me know</a> if you have any feedback
