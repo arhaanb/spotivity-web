@@ -14,7 +14,7 @@ const Index = ({ }) => (
 			<div className="row center">
 				<div className="flex-center">
 					<div className="brandimg">
-						<Image src={Brand} alt="" />
+						<Image src={Brand} alt="Spotivity | Branding" draggable='false' />
 					</div>
 				</div>
 				<div className="flex-center">
@@ -30,7 +30,7 @@ const Index = ({ }) => (
 					<a target="_blank" href="//arhn.us/spotivity" style={{ textDecoration: 'none' }}>
 						<button>
 							<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
-								<Image src={Play} alt="" />
+								<Image src={Play} alt="Google Play Store" draggable='false' />
 							</div>
 							Play Store
 						</button>
@@ -44,7 +44,7 @@ const Index = ({ }) => (
 					<Image
 						src={Main}
 						alt="Spotivity mockup"
-						draggable={false}
+						draggable='false'
 						placeholder="blur"
 					/>
 				</div>
@@ -71,7 +71,7 @@ const Index = ({ }) => (
 
 					<button onClick={() => window.open('https://arhn.us/spotivity')}>
 						<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
-							<Image src={Play} alt="" />
+							<Image src={Play} alt="Google Play Store" draggable='false' />
 						</div>
 						Play Store
 					</button>
@@ -84,7 +84,7 @@ const Index = ({ }) => (
 						<Image
 							src={Yuh}
 							alt="Grid of music artists"
-							draggable={false}
+							draggable='false'
 							placeholder='blur'
 						/>
 					</div>
@@ -99,7 +99,7 @@ const Index = ({ }) => (
 				<div>
 					<button className='behance' onClick={() => window.open('https://arhn.us/spot-design')}>
 						<div style={{ width: '1.2em', marginRight: 10, marginBottom: '-0.2em' }}>
-							<Image src={Behance} alt="" />
+							<Image src={Behance} alt="Behance" draggable='false' />
 						</div>
 						Behance
 					</button>
@@ -113,11 +113,11 @@ const Index = ({ }) => (
 					<div className="four columns">
 						<h6>Spotivity</h6>
 						<div style={{ display: 'flex', justifyContent: "flex-start", alignItems: 'center' }}>
-							<div style={{ width: '3em', marginRight: 12, marginBottom: '-7px' }}>
+							<div style={{ width: '3em', marginRight: 12, marginTop: '5px' }}>
 								<Image
 									src={Logo}
 									alt="Spotivity logo"
-									draggable={false}
+									draggable='false'
 								/>
 							</div>
 							<div>
