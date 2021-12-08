@@ -16,7 +16,14 @@ export default async function handler(req, res) {
 				if (req?.body?.password == process?.env?.PASSWORD) {
 					User.find(
 						{},
-						{ currentDisplayName: 1, username: 1, email: 1, createdAt: 1 }
+						{
+							// currentDisplayName: 1,
+							// username: 1,
+							// email: 1,
+							// createdAt: 1,
+							// lastUpdated: 1,
+							authToken: 0
+						}
 					).then((user) => {
 						res.status(201).json({ success: true, message: user })
 					})

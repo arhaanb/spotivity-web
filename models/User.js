@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now()
 	},
+	lastUpdated: {
+		type: Date
+	},
 	authToken: String
 })
 

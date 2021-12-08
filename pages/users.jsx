@@ -49,9 +49,14 @@ export default function Blog() {
                 <div className="GFG">
 
                   {data?.map((user, index) => {
+                    var options = { year: 'numeric', month: 'long', day: 'numeric' };
                     const event = new Date(user?.createdAt);
 
-                    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    if (user?.lastUpdated) {
+                      const lastupdate = new Date(user?.lastUpdated);
+                      const updated = lastupdate.toLocaleDateString("en-US", options)
+                    }
+
                     const date = event.toLocaleDateString("en-US", options)
                     return (
                       <div key={user._id} style={{ marginBottom: 20 }} className='flexthing'>
@@ -62,6 +67,9 @@ export default function Blog() {
                           <h5 className='zero'>{user?.currentDisplayName ? user?.currentDisplayName : "error"}</h5>
                           <h6 className="zero">{user?.email ? user?.email : "error"}</h6>
                           <p style={{ fontSize: '0.9em' }} className="zero">{date}</p>
+                          {updated ?
+                            <p style={{ fontSize: '0.9em' }} className="zero">Last update: {updated}</p>
+                            : null}
                         </div>
                       </div>
                     )
