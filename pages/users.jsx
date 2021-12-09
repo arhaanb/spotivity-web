@@ -41,7 +41,7 @@ export default function Blog() {
         </form>
         {errormsg ? <p style={{ marginTop: 10 }}>{errormsg == 'Request failed with status code 400' ? 'Incorrect password' : errormsg}</p> : null}
 
-        <div className="userdata">
+        <div className="userdata" style={{ marginBottom: 50 }}>
           {data ?
             (
               <>
@@ -61,7 +61,7 @@ export default function Blog() {
                     return (
                       <div key={user._id} style={{ marginBottom: 20 }} className='flexthing'>
                         <div>
-                          <h4 className="mono zero noselect" style={{ marginRight: '0.75em' }}>{data.length > 9 ? `0${index + 1}` : index + 1}</h4>
+                          <h4 className="mono zero noselect" style={{ marginRight: '0.75em' }}>{data.length > 9 ? index < 10 ? `0${index + 1}` : index + 1 : index + 1}</h4>
                         </div>
                         <div>
                           <h5 className='zero'>{user?.currentDisplayName ? user?.currentDisplayName : "error"}</h5>
