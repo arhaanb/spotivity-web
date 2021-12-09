@@ -52,24 +52,24 @@ export default function Blog() {
                     var options = { year: 'numeric', month: 'long', day: 'numeric' };
                     const event = new Date(user?.createdAt);
 
-                    if (user?.lastUpdated) {
-                      const lastupdate = new Date(user?.lastUpdated);
-                      const updated = lastupdate.toLocaleDateString("en-US", options)
-                    }
+                    // if (user?.lastUpdated) {
+                    //   const lastupdate = new Date(user?.lastUpdated);
+                    //   const updated = lastupdate.toLocaleDateString("en-US", options)
+                    // }
 
                     const date = event.toLocaleDateString("en-US", options)
                     return (
                       <div key={user._id} style={{ marginBottom: 20 }} className='flexthing'>
                         <div>
-                          <h4 className="mono zero noselect" style={{ marginRight: '0.75em' }}>{data.length > 9 ? index < 10 ? `0${index + 1}` : index + 1 : index + 1}</h4>
+                          <h4 className="mono zero noselect" style={{ marginRight: '0.75em' }}>{data.length > 9 ? index < 9 ? `0${index + 1}` : index + 1 : index + 1}</h4>
                         </div>
                         <div>
                           <h5 className='zero'>{user?.currentDisplayName ? user?.currentDisplayName : "error"}</h5>
                           <h6 className="zero">{user?.email ? user?.email : "error"}</h6>
                           <p style={{ fontSize: '0.9em' }} className="zero">{date}</p>
-                          {updated ?
+                          {/* {updated ?
                             <p style={{ fontSize: '0.9em' }} className="zero">Last update: {updated}</p>
-                            : null}
+                            : null} */}
                         </div>
                       </div>
                     )
