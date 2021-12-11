@@ -37,7 +37,7 @@ export default function Blog() {
         </div>
 
         <form className="zero" onSubmit={registerUser}>
-          <input className="zero" name="password" type="password" placeholder="Password" />
+          <input className="zero" name="password" required type="password" placeholder="Password" />
         </form>
         {errormsg ? <p style={{ marginTop: 10 }}>{errormsg == 'Request failed with status code 400' ? 'Incorrect password' : errormsg}</p> : null}
 
