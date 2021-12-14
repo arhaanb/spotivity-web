@@ -60,7 +60,11 @@ export default function Blog() {
                           <h4 className="mono zero noselect" style={{ marginRight: '0.75em' }}>{data.length > 9 ? index < 9 ? `0${index + 1}` : index + 1 : index + 1}</h4>
                         </div>
                         <div>
-                          <h5 className='zero'>{user?.currentDisplayName ? user?.currentDisplayName : "error"}</h5>
+                          <h5 className='zero'>
+                            {user?.currentDisplayName ?
+                              <a className='userlink' href={`https://open.spotify.com/user/${user?.username}`} target="_blank">{user?.currentDisplayName}</a>
+                              : "error"}
+                          </h5>
                           <h6 className="zero">{user?.email ? user?.email : "error"}</h6>
                           <p style={{ fontSize: '0.9em' }} className="zero">{date}</p>
                         </div>

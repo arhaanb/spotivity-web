@@ -275,3 +275,11 @@ a:hover {
     padding: 2em !important;
   }
 }
+
+.userlink {
+  color: #222;
+}
+
+.userlink:hover {
+  color: green;
+}
