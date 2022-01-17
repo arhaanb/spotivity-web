@@ -162,10 +162,6 @@ button, .button {
   transition: 0.3s;
 }
 
-/* button.behance:hover {
-  background-color: rgba(34, 34, 34, 0.05);
-} */
-
 button:hover, .button:hover {
   background-color: rgba(34, 34, 34, 0.075);
   cursor: pointer;
@@ -211,12 +207,12 @@ a:hover {
   margin-top: 30px;
 }
 
-.mainh1 {
-  margin-left: 35px;
+.parawidth {
+  width: 60%;
 }
 
-.mainpara {
-  margin-right: 19px !important;
+.wholewidth {
+  width: 70%;
 }
 
 @media screen and (max-width: 750px) {
@@ -224,13 +220,13 @@ a:hover {
     width: 60%;
   }
 
-  .mainh1 {
-    margin-left: 15px;
+  .parawidth {
+    width: 100%;
   }
 
-  .mainpara {
-    margin-right: 0;
-    margin-left: 17.5px;
+
+  .wholewidth {
+    width: 100%;
   }
 }
 
