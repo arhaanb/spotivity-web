@@ -9,8 +9,8 @@ export default async function handler(req, res) {
 	switch (method) {
 		case 'GET':
 			try {
-				const pets = await User.find({}) /* find all the data in our database */
-				res.status(200).json({ success: true, userCount: pets.length })
+				const users = await User.find({}) /* find all the data in our database */
+				res.status(200).json({ success: true, userCount: users.length })
 			} catch (error) {
 				res.status(400).json({ success: false })
 			}
