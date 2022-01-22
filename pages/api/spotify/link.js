@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     case 'GET':
       try {
         const users = await Link.findOne({ id: "spotivitylink" }) /* find all the data in our database */
-        res.status(200).json({ success: true, userCount: users.link })
+        res.status(200).json({ success: true, link: users.link })
       } catch (error) {
         res.status(400).json({ success: false })
       }
