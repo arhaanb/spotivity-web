@@ -157,7 +157,7 @@ const Index = ({}) => (
 				<div className="row">
 					<div className="four columns">
 						<h6>Spotivity</h6>
-						<p>Check your Spotify friend activity.</p>
+						{/* <p>Check your Spotify friend activity.</p> */}
 						<div
 							style={{
 								display: 'flex',
@@ -194,7 +194,9 @@ const Index = ({}) => (
 						<p>
 							<Link href="/users">
 								<a>Analytics</a>
-							</Link> / <Link href="/link">
+							</Link>{' '}
+							/{' '}
+							<Link href="/link">
 								<a>Edit link</a>
 							</Link>
 						</p>
@@ -216,7 +218,10 @@ const Index = ({}) => (
 							</a>
 						</p>
 						<p>
-							<a href="https://github.com/arhaanb/spotivity-web" target="_blank">
+							<a
+								href="https://github.com/arhaanb/spotivity-web"
+								target="_blank"
+							>
 								GitHub
 							</a>
 						</p>
