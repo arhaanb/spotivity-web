@@ -22,8 +22,8 @@ export default async function handler(req, res) {
 					Link.findOne({ id: 'spotivitylink' }).then((link) => {
 						if (link) {
 							if (
-								req.body.link.slice(0, 8) == 'https://' ||
-								req.body.link.slice(0, 7) == 'http://'
+								req?.body?.link?.slice(0, 8) == 'https://' ||
+								req?.body?.link?.slice(0, 7) == 'http://'
 							) {
 								link.link = req?.body?.link
 							} else {
