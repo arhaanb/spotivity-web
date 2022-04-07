@@ -6,6 +6,7 @@
 	},
 	"trailingSlash": false,
 	"public": false,
+	"cleanUrls": true,
 	"headers": [
 		{
 			"source": "/api/(.*)",
