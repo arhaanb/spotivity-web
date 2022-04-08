@@ -25,6 +25,7 @@
     font-family: "Manrope" !important;
     font-family: 15px;
     line-height: 1.5;
+    color: #222;
   }
 
   @media (max-width: 750px) {
@@ -36,7 +37,7 @@
 
   p {
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.65;
     color: #595959;
   }
 
@@ -65,16 +66,26 @@
 
   ul li {
     margin-bottom: 1em;
-    font-family: 15px;
+    font-size: 15px;
     line-height: 1.5;
     color: #595959;
   }
 
   ul {
     list-style-type: square;
-    font-family: 15px;
+    font-size: 15px;
     line-height: 1.5;
     color: #595959;
+  }
+
+  ::selection {
+    color: #222;
+    background: rgba(80, 247, 183, 0.521);
+  }
+
+  ::-moz-selection {
+    color: #222;
+    background: rgba(80, 247, 183, 0.521);
   }
 </style>
 

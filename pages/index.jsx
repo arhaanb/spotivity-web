@@ -201,7 +201,15 @@ const Index = ({}) => (
 							</Link>
 						</p>
 						<p>
-							<a href="/privacy.html">Privacy Policy</a>
+							<a
+								href={
+									process.env.NODE_ENV == 'production'
+										? '/privacy'
+										: `/privacy.html`
+								}
+							>
+								Privacy Policy
+							</a>
 						</p>
 					</div>
 
