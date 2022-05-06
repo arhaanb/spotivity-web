@@ -20,4 +20,4 @@ Check your friends' Spotify activity from your phone. Use [**Spotivity**](https:
 
 <br />
 
-<p align="center">Made with 💖 by <a href="//arhaanbahadur.co" target="_blank">Arhaan</a></p>
+<p align="center">Made with 💖 by <a href="//arhaanb.com" target="_blank">Arhaan</a></p>
