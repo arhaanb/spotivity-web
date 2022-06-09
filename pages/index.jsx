@@ -126,7 +126,7 @@ const Index = ({}) => (
 				<p>
 					Check out the Behance project to find out the thought process behind
 					the logo and app. Also{' '}
-					<a href="//arhaanbahadur.co/explore#contact" target="_blank">
+					<a href="//arhaanb.com/explore#contact" target="_blank">
 						let me know
 					</a>{' '}
 					if you have any feedback or feature requests for the app.
@@ -171,7 +171,7 @@ const Index = ({}) => (
 							<div>
 								<p>
 									Made by{' '}
-									<a href="//arhaanbahadur.co" target="_blank">
+									<a href="//arhaanb.com" target="_blank">
 										Arhaan Bahadur
 									</a>
 								</p>
