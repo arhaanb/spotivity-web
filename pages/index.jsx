@@ -6,6 +6,7 @@ import Play from '../css/play.svg'
 import Behance from '../css/behance.svg'
 import Logo from '../css/logo.svg'
 import Yuh from '../css/yuh.png'
+import Dark from '../css/darkmode.png'
 import Image from 'next/image'
 
 const Index = ({}) => (
@@ -148,6 +149,55 @@ const Index = ({}) => (
 						</div>
 						Behance
 					</button>
+				</div>
+			</div>
+		</div>
+
+		<div className="maingrid">
+			<div
+				className="block size6"
+				style={{ backgroundColor: '#323232', color: '#fff' }}
+			>
+				<div className="one columns noselect">&nbsp;</div>
+				<div className="four columns">
+					<h5 className="zero introdark" style={{ opacity: 0.5 }}>
+						Introducing
+					</h5>
+					<h1>Night Mode</h1>
+					<p>
+						One of the most requested features for Spotivity is here. Reduce the
+						strain on your eyes by viewing your friend activity with the all
+						new, gorgeous dark theme.
+					</p>
+					<button
+						className="darkbtn"
+						onClick={() => window.open('https://arhn.us/spotivity')}
+					>
+						<div
+							style={{
+								width: '1.2em',
+								marginRight: 10,
+								marginBottom: '-0.2em'
+							}}
+						>
+							<Image src={Play} alt="Google Play Store" draggable="false" />
+						</div>
+						Play Store
+					</button>
+				</div>
+				<div className="one columns noselect">&nbsp;</div>
+				<div className="six columns">
+					<div className="flex-center">
+						<div className="eight columns darkimg">
+							<Image
+								src={Dark}
+								alt="Spotivity in Dark Mode"
+								draggable={false}
+								placeholder="blur"
+							/>
+						</div>
+					</div>
+					<div className="u-cf"></div>
 				</div>
 			</div>
 		</div>

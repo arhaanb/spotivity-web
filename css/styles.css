@@ -215,6 +215,24 @@ a:hover {
   width: 70%;
 }
 
+.darkbtn {
+  background-color: #fff;
+}
+
+.darkbtn:hover {
+  background-color: rgba(226, 226, 226);
+  opacity: 0.8;
+}
+
+#darkmode {
+  background-color: #222;
+  color: #fff;
+}
+
+.introdark {
+  margin-top: 3em;
+}
+
 @media screen and (max-width: 750px) {
   .brandimg {
     width: 60%;
@@ -224,9 +242,16 @@ a:hover {
     width: 100%;
   }
 
+  .introdark {
+    margin-top: 0em;
+  }
 
   .wholewidth {
     width: 100%;
+  }
+
+  .darkimg {
+    margin-top: 3em;
   }
 }
 
