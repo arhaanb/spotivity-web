@@ -13,6 +13,10 @@ p {
   opacity: 0.75;
 }
 
+button {
+  color: #222;
+}
+
 .noselect, img, br, button {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
