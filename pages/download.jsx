@@ -10,22 +10,29 @@ const DownloadPage = ({ deviceType }) => {
 
 DownloadPage.getInitialProps = async ({ req, res }) => {
 	// Redirect to another page
+	function getMobileOperatingSystem(uaid) {
+		// Windows Phone must come first because its UA also contains "Android"
+		// if (/windows phone/i.test(uaid)) {
+		// 	return 'Windows Phone'
+		// }
+
+		if (/android/i.test(uaid)) {
+			return 'android'
+		}
+
+		// iOS detection from: http://stackoverflow.com/a/9039885/177710
+		if (/iPad|iPhone|iPod/.test(uaid)) {
+			return 'ios'
+		}
+
+		return 'unknown'
+	}
 
 	const userAgent = req.headers['user-agent']
 
-	// Get Device Type
-	let deviceType
-	if (userAgent.includes('Android')) {
-		deviceType = 'Android'
-	} else if (userAgent.includes('iOS')) {
-		deviceType = 'iOS'
-	} else {
-		deviceType = 'Other'
-	}
+	const deviceType = getMobileOperatingSystem(userAgent)
 
-	// Log device type
-	console.log(`Device type is ${deviceType}`)
-
+	// redirection code
 	// res.writeHead(302, {
 	// 	Location: 'https://arhaanb.com/some-other-page'
 	// })
