@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import '../css/skeleton.css'
-import '../css/styles.css'
+import '../css/styles.scss'
 
 function MyApp({ Component, pageProps }) {
 	const description =
