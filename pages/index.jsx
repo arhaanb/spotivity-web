@@ -3,70 +3,127 @@ import Mock from '../css/mock.png'
 import Main from '../css/main.png'
 import Brand from '../css/brand.svg'
 import Play from '../css/play.svg'
+import Apple from '../css/img/apple.svg'
 import Behance from '../css/behance.svg'
 import Logo from '../css/logo.svg'
 import Yuh from '../css/yuh.png'
 import Dark from '../css/darkmode.png'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
+import AppleWhite from '../css/img/applewhite.svg'
+import PlayIcon from '../css/img/play.svg'
+import BigMock from '../css/img/phone.png'
+
+function PlayBtn() {
+	return (
+		<>
+			<a
+				className="play btn"
+				href="https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity"
+				target="_blank"
+			>
+				<div className="img">
+					<Image src={PlayIcon} alt="Google Play Store" draggable="false" />
+				</div>
+				{/* <img src="/spotivity/play.svg" alt="" /> */}
+				<span>Google Play</span>
+			</a>
+		</>
+	)
+}
+
+function DownloadBtn({ dark, className }) {
+	return (
+		<>
+			<a
+				className={`${className} ${dark ? 'apple' : 'play'} btn`}
+				style={{ width: '8em' }}
+				href="/download"
+				target="_blank"
+			>
+				{/* <div className="img">
+					<Image src={PlayIcon} alt="Google Play Store" draggable="false" />
+				</div> */}
+				{/* <img src="/spotivity/play.svg" alt="" /> */}
+				<span>Download now</span>
+			</a>
+		</>
+	)
+}
+
+function AppStoreBtn() {
+	return (
+		<>
+			<a
+				className="apple btn"
+				href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960"
+				target="_blank"
+			>
+				<div className="img">
+					<Image
+						className="img"
+						src={AppleWhite}
+						alt="Apple App Store"
+						draggable="false"
+					/>
+				</div>
+				{/* <img src="/spotivity/applewhite.svg" alt="" /> */}
+				<span>App Store</span>
+			</a>
+		</>
+	)
+}
 
 const Index = ({}) => (
 	<>
 		<section className="container" id="mainp">
-			<div className="row center">
-				<div className="flex-center">
+			<br />
+			<br className="anti" />
+			<div className="row">
+				<div className="six columns respcols">
+					<br className="anti" />
+					<br className="anti" />
+					<br className="anti" />
+					<br className="anti" />
+					<br className="anti" />
+					<br className="anti" />
 					<div className="brandimg">
 						<Image src={Brand} alt="Spotivity | Branding" draggable="false" />
 					</div>
-				</div>
 
-				<div className="flex-center">
-					<div className="wholewidth">
-						<h1
-							className="mainh1"
-							style={{ marginBottom: 5, textAlign: 'center', marginTop: 0 }}
-						>
-							See what music your friends are listening to
+					<div>
+						<h1 style={{ marginBottom: 5, fontSize: 40, marginTop: 0 }}>
+							See what music your friends are listening to!
 						</h1>
 
-						<div className="flex-center">
-							<div className="parawidth">
-								<p style={{ fontSize: '1.2em' }} className="center mainpara">
-									Check your Spotify friend activity right from your phone with
-									Spotivity.
-								</p>
-							</div>
+						<div
+						// className="parawidth"
+						>
+							{/* <p
+								style={{ fontSize: '1.2em' }}
+								// className="mainpara"
+							>
+								Check your Spotify friend activity right from your phone with
+								Spotivity.
+							</p> */}
 						</div>
 					</div>
-					<a
-						target="_blank"
-						href="//arhn.us/spotivity"
-						style={{ textDecoration: 'none' }}
-					>
-						<button>
-							<div
-								style={{
-									width: '1.2em',
-									marginRight: 10,
-									marginBottom: '-0.2em'
-								}}
-							>
-								<Image src={Play} alt="Google Play Store" draggable="false" />
-							</div>
-							Play Store
-						</button>
-					</a>
-				</div>
-				<div className="u-cf"></div>
-			</div>
 
-			<div className="flex-center image">
-				<div className="mainmockimg">
-					<Image
-						src={Main}
-						alt="Spotivity mockup"
-						draggable="false"
-						placeholder="blur"
-					/>
+					<div style={{ marginTop: 25 }} className="flexbtn bro noselect">
+						<AppStoreBtn />
+						<PlayBtn />
+					</div>
+					<div className="u-cf"></div>
+				</div>
+
+				<div className="six columns">
+					<div className="brandimgclass" style={{ width: '100%' }}>
+						<Image
+							src={BigMock}
+							alt="Spotivity mockup"
+							draggable="false"
+							placeholder="blur"
+						/>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -97,7 +154,7 @@ const Index = ({}) => (
 						use the desktop app. Built with React Native and Expo.
 					</p>
 
-					<button onClick={() => window.open('https://arhn.us/spotivity')}>
+					{/* <button onClick={() => window.open('https://arhn.us/spotivity')}>
 						<div
 							style={{
 								width: '1.2em',
@@ -108,7 +165,12 @@ const Index = ({}) => (
 							<Image src={Play} alt="Google Play Store" draggable="false" />
 						</div>
 						Play Store
-					</button>
+					</button> */}
+					<div className="laptop flexbtn bro noselect">
+						<AppStoreBtn />
+						<PlayBtn />
+					</div>
+					<DownloadBtn className="mob" dark />
 				</div>
 			</div>
 
@@ -169,7 +231,7 @@ const Index = ({}) => (
 						strain on your eyes by viewing your friend activity with the all
 						new, gorgeous dark theme.
 					</p>
-					<button
+					{/* <button
 						className="darkbtn"
 						onClick={() => window.open('https://arhn.us/spotivity')}
 					>
@@ -183,7 +245,12 @@ const Index = ({}) => (
 							<Image src={Play} alt="Google Play Store" draggable="false" />
 						</div>
 						Play Store
-					</button>
+					</button> */}
+					<div className="laptop flexbtn bro noselect">
+						<AppStoreBtn />
+						<PlayBtn />
+					</div>
+					<DownloadBtn className="mob" />
 				</div>
 				<div className="one columns noselect">&nbsp;</div>
 				<div className="six columns">
@@ -195,6 +262,8 @@ const Index = ({}) => (
 								draggable={false}
 								placeholder="blur"
 							/>
+
+							<img src={Dark} alt="" />
 						</div>
 					</div>
 					<div className="u-cf"></div>
@@ -221,17 +290,17 @@ const Index = ({}) => (
 							<div>
 								<p>
 									Made by{' '}
-									<a href="//arhaanb.com" target="_blank">
+									<Link href="//arhaanb.com" target="_blank">
 										Arhaan Bahadur
-									</a>
+									</Link>
 								</p>
 								<p>
-									<a
+									<Link
 										href="https://open.spotify.com/user/arhaanb"
 										target="_blank"
 									>
 										Follow me on Spotify!
-									</a>
+									</Link>
 								</p>
 							</div>
 						</div>
@@ -239,16 +308,11 @@ const Index = ({}) => (
 					<div className="four columns">
 						<h6>Links</h6>
 						<p>
-							<a href="/api/spotify">API</a>
+							<Link href="/api/spotify">API</Link>
 						</p>
 						<p>
-							<Link href="/users">
-								<a>Analytics</a>
-							</Link>{' '}
-							/{' '}
-							<Link href="/link">
-								<a>Edit link</a>
-							</Link>
+							<Link href="/users">Analytics</Link> /{' '}
+							<Link href="/link">Edit link</Link>
 						</p>
 						<p>
 							<a

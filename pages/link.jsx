@@ -44,9 +44,7 @@ export default function LinkPage() {
 			<div className="container">
 				<br />
 				<p className="zero">
-					<Link href="/">
-						<a>&larr;&nbsp;&nbsp;&nbsp;Back home</a>
-					</Link>
+					<Link href="/">&larr;&nbsp;&nbsp;&nbsp;Back home</Link>
 				</p>
 				<br />
 				<div className="row">

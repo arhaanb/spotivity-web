@@ -32,12 +32,27 @@ DownloadPage.getInitialProps = async ({ req, res }) => {
 
 	const deviceType = getMobileOperatingSystem(userAgent)
 
-	// redirection code
-	// res.writeHead(302, {
-	// 	Location: 'https://arhaanb.com/some-other-page'
-	// })
-	return { deviceType }
+	if (deviceType == 'android') {
+		// redirection code
+		res.writeHead(302, {
+			Location:
+				'https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity'
+		})
+	} else if (deviceType == 'ios') {
+		if (deviceType == 'android') {
+			// redirection code
+			res.writeHead(302, {
+				Location:
+					'https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960'
+			})
+		}
+	} else {
+		res.writeHead(302, {
+			Location: '/'
+		})
+	}
 	res.end()
+	return { deviceType }
 }
 
 export default DownloadPage
