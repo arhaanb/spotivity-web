@@ -10,7 +10,7 @@ const DownloadPage = ({ deviceType }) => {
 
 DownloadPage.getInitialProps = async ({ req, res }) => {
 	// Redirect to another page
-	function getMobileOperatingSystem(uaid) {
+	function getOS(uaid) {
 		// Windows Phone must come first because its UA also contains "Android"
 		// if (/windows phone/i.test(uaid)) {
 		// 	return 'Windows Phone'
@@ -30,28 +30,33 @@ DownloadPage.getInitialProps = async ({ req, res }) => {
 
 	const userAgent = req.headers['user-agent']
 
-	const deviceType = getMobileOperatingSystem(userAgent)
+	const deviceType = getOS(userAgent)
 
-	if (deviceType == 'android') {
-		// redirection code
-		res.writeHead(302, {
-			Location:
-				'https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity'
-		})
-	} else if (deviceType == 'ios') {
-		if (deviceType == 'android') {
-			// redirection code
-			res.writeHead(302, {
-				Location:
-					'https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960'
-			})
-		}
-	} else {
-		res.writeHead(302, {
-			Location: '/'
-		})
-	}
-	res.end()
+	// if (deviceType === 'android') {
+	// 	res.redirect(
+	// 		'https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity'
+	// 	)
+	// 	// res.writeHead(302, {
+	// 	// 	Location:
+
+	// 	// })
+	// 	// res.end()
+	// } else if (deviceType === 'ios') {
+	// 	res.redirect(
+	// 		'https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960'
+	// 	)
+	// 	// res.writeHead(302, {
+	// 	// 	Location:
+	// 	// 		'https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960'
+	// 	// })
+	// 	// res.end()
+	// }
+	// // else {
+	// // 	res.writeHead(302, {
+	// // 		Location: '/'
+	// // 	})
+	// // res.end()
+	// // }
 	return { deviceType }
 }
 

@@ -31,20 +31,20 @@ function PlayBtn() {
 	)
 }
 
-function DownloadBtn({ dark, className }) {
+function DownloadBtn({ dark, className, link }) {
 	return (
 		<>
 			<a
 				className={`${className} ${dark ? 'apple' : 'play'} btn`}
 				style={{ width: '8em' }}
-				href="/download"
+				href={link ? link : '/'}
 				target="_blank"
 			>
-				{/* <div className="img">
-					<Image src={PlayIcon} alt="Google Play Store" draggable="false" />
-				</div> */}
+				<div className="img">
+					<Image src={Behance} alt="Behance" draggable="false" />
+				</div>
 				{/* <img src="/spotivity/play.svg" alt="" /> */}
-				<span>Download now</span>
+				<span>Behance</span>
 			</a>
 		</>
 	)
@@ -73,10 +73,10 @@ function AppStoreBtn() {
 	)
 }
 
-const Index = ({}) => (
+const Index = ({ deviceType }) => (
 	<>
 		<section className="container" id="mainp">
-			<br />
+			<br className="anti" />
 			<br className="anti" />
 			<div className="row">
 				<div className="six columns respcols">
@@ -108,9 +108,15 @@ const Index = ({}) => (
 						</div>
 					</div>
 
-					<div style={{ marginTop: 25 }} className="flexbtn bro noselect">
+					<div
+						style={{ marginTop: 25 }}
+						className="flexbtn bro noselect laptop"
+					>
 						<AppStoreBtn />
 						<PlayBtn />
+					</div>
+					<div style={{ marginTop: 20, marginBottom: -15 }} className="mob">
+						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
 					</div>
 					<div className="u-cf"></div>
 				</div>
@@ -170,7 +176,11 @@ const Index = ({}) => (
 						<AppStoreBtn />
 						<PlayBtn />
 					</div>
-					<DownloadBtn className="mob" dark />
+
+					<div className="mob">
+						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
+					</div>
+					{/* <DownloadBtn dark /> */}
 				</div>
 			</div>
 
@@ -187,16 +197,16 @@ const Index = ({}) => (
 				</div>
 				<h2 style={{ marginBottom: 5, marginTop: 5 }}>Design</h2>
 				<p>
-					Check out the Behance project to find out the thought process behind
-					the logo and app. Also{' '}
+					Check out the thought process behind the logo and app.{' '}
 					<a href="//arhaanb.com/explore#contact" target="_blank">
-						let me know
+						Let me know
 					</a>{' '}
-					if you have any feedback or feature requests for the app.
+					any feedback or feature requests for the app.
+					{/*  Also{' '} */}
 				</p>
 
 				<div>
-					<button
+					{/* <button
 						className="behance"
 						onClick={() => window.open('https://arhn.us/spot-design')}
 					>
@@ -210,7 +220,8 @@ const Index = ({}) => (
 							<Image src={Behance} alt="Behance" draggable="false" />
 						</div>
 						Behance
-					</button>
+					</button> */}
+					<DownloadBtn link={'https://arhn.us/spot-design'} />
 				</div>
 			</div>
 		</div>
@@ -250,7 +261,9 @@ const Index = ({}) => (
 						<AppStoreBtn />
 						<PlayBtn />
 					</div>
-					<DownloadBtn className="mob" />
+					<div className="mob">
+						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
+					</div>
 				</div>
 				<div className="one columns noselect">&nbsp;</div>
 				<div className="six columns">
@@ -289,17 +302,17 @@ const Index = ({}) => (
 							</div>
 							<div>
 								<p>
-									Made by{' '}
-									<Link href="//arhaanb.com" target="_blank">
-										Arhaan Bahadur
-									</Link>
-								</p>
-								<p>
 									<Link
 										href="https://open.spotify.com/user/arhaanb"
 										target="_blank"
 									>
 										Follow me on Spotify!
+									</Link>
+								</p>
+								<p>
+									Made with &#10084; by{' '}
+									<Link href="//arhaanb.com" target="_blank">
+										Arhaan Bahadur
 									</Link>
 								</p>
 							</div>
@@ -330,7 +343,18 @@ const Index = ({}) => (
 					<div className="four columns">
 						<h6>External</h6>
 						<p>
-							<a href="https://arhn.us/spotivity" target="_blank">
+							<a
+								href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960"
+								target="_blank"
+							>
+								App Store
+							</a>
+						</p>
+						<p>
+							<a
+								href="https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity"
+								target="_blank"
+							>
 								Google Play Store
 							</a>
 						</p>
@@ -339,19 +363,46 @@ const Index = ({}) => (
 								Behance
 							</a>
 						</p>
-						<p>
+						{/* <p>
 							<a
 								href="https://github.com/arhaanb/spotivity-web"
 								target="_blank"
 							>
 								GitHub
 							</a>
-						</p>
+						</p> */}
 					</div>
 				</div>
 			</div>
 		</div>
 	</>
 )
+
+Index.getInitialProps = async ({ req, res }) => {
+	// Redirect to another page
+	function getOS(uaid) {
+		// Windows Phone must come first because its UA also contains "Android"
+		// if (/windows phone/i.test(uaid)) {
+		// 	return 'Windows Phone'
+		// }
+
+		if (/android/i.test(uaid)) {
+			return 'android'
+		}
+
+		// iOS detection from: http://stackoverflow.com/a/9039885/177710
+		if (/iPad|iPhone|iPod/.test(uaid)) {
+			return 'ios'
+		}
+
+		return 'unknown'
+	}
+
+	const userAgent = req.headers['user-agent']
+
+	const deviceType = getOS(userAgent)
+
+	return { deviceType }
+}
 
 export default Index

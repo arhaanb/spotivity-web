@@ -396,14 +396,14 @@ a.btn {
 		padding-top: 0.5em;
 	}
 
-	a.btn {}
-
 	.laptop {
 		display: none !important;
 	}
 
 	.mob {
 		display: block !important;
+		width: auto !important;
+		box-sizing: content-box !important;
 	}
 
 	.anti {
