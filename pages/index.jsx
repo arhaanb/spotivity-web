@@ -198,7 +198,7 @@ const Index = ({ deviceType }) => (
 				<h2 style={{ marginBottom: 5, marginTop: 5 }}>Design</h2>
 				<p>
 					Check out the thought process behind the logo and app.{' '}
-					<a href="//arhaanb.com/explore#contact" target="_blank">
+					<a href="https://arhaanb.com/explore#contact" target="_blank">
 						Let me know
 					</a>{' '}
 					any feedback or feature requests for the app.
@@ -311,7 +311,7 @@ const Index = ({ deviceType }) => (
 								</p>
 								<p>
 									Made with &#10084; by{' '}
-									<Link href="//arhaanb.com" target="_blank">
+									<Link href="https://arhaanb.com" target="_blank">
 										Arhaan Bahadur
 									</Link>
 								</p>
@@ -324,8 +324,7 @@ const Index = ({ deviceType }) => (
 							<Link href="/api/spotify">API</Link>
 						</p>
 						<p>
-							<Link href="/users">Analytics</Link> /{' '}
-							<Link href="/link">Edit link</Link>
+							<Link href="/users">Analytics</Link>
 						</p>
 						<p>
 							<a
@@ -398,11 +397,19 @@ Index.getInitialProps = async ({ req, res }) => {
 		return 'unknown'
 	}
 
-	const userAgent = req.headers['user-agent']
+	let userAgent
+	if (req) {
+		// if you are on the server and you get a 'req' property from your context
+		userAgent = req.headers['user-agent'] // get the user-agent from the headers
+	} else {
+		userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
+	}
+
+	// const userAgent = req.headers['user-agent']
 
 	const deviceType = getOS(userAgent)
 
-	return { deviceType }
+	return { deviceType: deviceType || 'unknown' }
 }
 
 export default Index

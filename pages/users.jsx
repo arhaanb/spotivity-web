@@ -29,7 +29,7 @@ export default function Blog() {
 				<br />
 				<p className="zero">
 					<Link href="/">
-						<a>&larr;&nbsp;&nbsp;&nbsp;Back home</a>
+						&larr;&nbsp;&nbsp;&nbsp;Back home
 					</Link>
 				</p>
 				<br />
