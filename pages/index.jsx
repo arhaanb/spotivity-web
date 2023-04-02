@@ -310,7 +310,7 @@ const Index = ({ deviceType }) => (
 									</Link>
 								</p>
 								<p>
-									Made with &#10084; by{' '}
+									Made by{' '}
 									<Link href="https://arhaanb.com" target="_blank">
 										Arhaan Bahadur
 									</Link>
