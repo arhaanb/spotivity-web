@@ -11,7 +11,7 @@ import Dark from '../css/darkmode.png'
 import Image from 'next/legacy/image'
 import AppleWhite from '../css/img/applewhite.svg'
 import PlayIcon from '../css/img/play.svg'
-import BigMock from '../css/img/phone.png'
+import BigMock from '../css/img/mockup.png'
 
 function PlayBtn() {
 	return (
@@ -122,7 +122,7 @@ const Index = ({ deviceType }) => (
 				</div>
 
 				<div className="six columns">
-					<div className="brandimgclass" style={{ width: '100%' }}>
+					<div className="brandimgclass" style={{ width: '87%', marginTop: '1.8em', marginLeft: '7.5%' }}>
 						<Image
 							src={BigMock}
 							alt="Spotivity mockup"
