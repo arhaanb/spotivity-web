@@ -1,23 +1,18 @@
-# [Spotivity](https://spotivity.vercel.app)
+# [Spotivity](https://spotivity.me)
 
-> Official website for Spotivity, the mobile app. 
- 
-Check your friends' Spotify activity from your phone. Use [**Spotivity**](https://spotivity.vercel.app) to see what music your friends are currently listening to on Spotify.
+> Official website for Spotivity, the mobile app.
 
-### Download now on the [Google Play Store](https://arhn.us/spotivity)
+Check your friends' Spotify activity from your phone. Use [**Spotivity**](https://spotivity.me) to see what music your friends are currently listening to on Spotify.
 
-<br />
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/49993666/150082835-1b04fd2b-588e-4e8c-b4d6-f7100a468d2f.png" width="75%" />
-</p>
+### [Download now! now out on iOS and Android!](https://spotivity.me)
 
 <br />
 
-## Friend Activity
-
-![Frame 71](https://user-images.githubusercontent.com/49993666/150083604-f7d0f497-9317-4f65-8269-841fa1250580.png)
+![1](https://github.com/arhaanb/spotivity-web/assets/49993666/2da2ce96-19ea-47e6-89e4-6fb1724c2173)
+![2](https://github.com/arhaanb/spotivity-web/assets/49993666/0575c0ac-99fc-4f4f-b106-676009d40eb7)
+![3](https://github.com/arhaanb/spotivity-web/assets/49993666/461a9856-2dfc-4c70-af91-d10bf5c90cb9)
+![4](https://github.com/arhaanb/spotivity-web/assets/49993666/1313a1ba-fc32-4f66-a04a-5fec18cd18f3)
 
 <br />
 
-<p align="center">Made with 💖 by <a href="//arhaanb.com" target="_blank">Arhaan</a></p>
+Made with 💖 by <a href="//arhaanb.com" target="_blank">Arhaan Bahadur</a>
