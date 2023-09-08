@@ -9,6 +9,14 @@
 		'Segoe UI Symbol';
 }
 
+img {
+	width: 100%;
+}
+
+.supportlogo {
+	width: 2.5em;
+}
+
 * {
 	scrollbar-color: var(--c-scrollbar) var(--c-bg);
 }
@@ -62,7 +70,8 @@ button {
 .noselect,
 img,
 br,
-button {
+button,
+a.btn {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -351,6 +360,19 @@ a:hover {
 	}
 }
 
+.bold {
+	font-weight: 800;
+}
+
+.suplink {
+	color: rgb(0, 0, 0);
+	font-weight: 800;
+	transition: 0.2s;
+	&:hover {
+		opacity: 0.6;
+	}
+}
+
 .userlink {
 	color: #222;
 }
@@ -368,8 +390,15 @@ a:hover {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	gap: 1.5em;
+	gap: 1em;
 
+}
+
+.flexbtn.smlbox {
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 0.75em;
 }
 
 a.btn {
@@ -394,6 +423,23 @@ a.btn {
 		}
 	}
 
+	&.support {
+		color: #222;
+		background-color: #fff;
+		border: 0.5px solid transparent;
+		box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+			rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+		&:hover {
+			border-color: #22222238;
+		}
+
+		gap: 1em;
+	}
+
+
+
+
 	// border: solid 1px #222;
 	border-radius: 0.75em;
 	padding: 0.8em 2.5em;
@@ -414,6 +460,11 @@ a.btn {
 	}
 }
 
+.supcont {
+	width: 70%;
+	margin-top: -2;
+}
+
 .mob {
 	display: none !important;
 }
@@ -431,6 +482,14 @@ a.btn {
 		justify-content: center;
 		margin-bottom: -1em;
 		padding-top: 0.5em;
+	}
+
+	.mob.nightmode {
+		margin-bottom: 3em !important;
+	}
+
+	.supcont {
+		width: 100%;
 	}
 
 	.laptop {

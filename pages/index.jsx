@@ -24,8 +24,30 @@ function PlayBtn() {
 				<div className="img">
 					<Image src={PlayIcon} alt="Google Play Store" draggable="false" />
 				</div>
-				{/* <img src="/spotivity/play.svg" alt="" /> */}
+
 				<span>Google Play</span>
+			</a>
+		</>
+	)
+}
+
+function SupportBtn() {
+	return (
+		<>
+			<a
+				className="support btn"
+				href="https://buymeacoffee.com/arhaanb"
+				target="_blank"
+			>
+				<div className="img">
+					<img
+						src="https://seeklogo.com/images/B/buy-me-a-coffee-logo-F1878A1EB2-seeklogo.com.png"
+						alt="Buy me a coffee"
+						draggable="false"
+					/>
+				</div>
+
+				<span>Buy Me A Coffee</span>
 			</a>
 		</>
 	)
@@ -36,14 +58,13 @@ function DownloadBtn({ dark, className, link }) {
 		<>
 			<a
 				className={`${className} ${dark ? 'apple' : 'play'} btn`}
-				style={{ width: '8em' }}
 				href={link ? link : '/'}
 				target="_blank"
 			>
 				<div className="img">
 					<Image src={Behance} alt="Behance" draggable="false" />
 				</div>
-				{/* <img src="/spotivity/play.svg" alt="" /> */}
+
 				<span>Behance</span>
 			</a>
 		</>
@@ -122,7 +143,10 @@ const Index = ({ deviceType }) => (
 				</div>
 
 				<div className="six columns">
-					<div className="brandimgclass" style={{ width: '87%', marginTop: '1.8em', marginLeft: '7.5%' }}>
+					<div
+						className="brandimgclass"
+						style={{ width: '87%', marginTop: '1.8em', marginLeft: '7.5%' }}
+					>
 						<Image
 							src={BigMock}
 							alt="Spotivity mockup"
@@ -136,51 +160,53 @@ const Index = ({ deviceType }) => (
 
 		<div className="maingrid">
 			<div
-				className="block size4 extra"
+				className="block size2 extra"
 				style={{ backgroundColor: '#F6F6F6', padding: '2em 4em 2em 4em' }}
 			>
-				<div className="four columns cardmockup">
-					<Image
-						src={Mock}
-						alt="Spotivity mockup"
-						draggable={false}
-						placeholder="blur"
-					/>
-				</div>
-				<div className="eight columns">
-					<br className="anti" />
-					<br className="anti" />
-					<br />
-					<h2 className="zero" style={{ marginBottom: 5, marginTop: 17 }}>
+				<Image
+					src={Mock}
+					alt="Spotivity mockup"
+					draggable={false}
+					placeholder="blur"
+				/>
+			</div>
+
+			<div className="block size2 extra" style={{ backgroundColor: '#F6F6F6' }}>
+				<br className="anti" />
+				<br className="anti" />
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'flex-start',
+						alignItems: 'center',
+						gap: '1em',
+						marginBottom: 10
+					}}
+				>
+					{/* <img src="/huh.png" style={{ width: '3.5em' }} alt="" /> */}
+					<h2 className="zero" style={{ marginBottom: 5 }}>
 						Spotivity
 					</h2>
-					<p>
-						The app brings one of the most requested features of Spotify to your
-						phone. You can now see what your friends are up to without having to
-						use the desktop app. Built with React Native and Expo.
-					</p>
+				</div>
+				<p>
+					See what music your friends are listening to on the go! View your{' '}
+					<span className="bold">Friend Activity</span> and view your stats
+					&mdash; your <span className="bold">Top Songs and Artists</span> for
+					all time ranges!
+				</p>
 
-					{/* <button onClick={() => window.open('https://arhn.us/spotivity')}>
-						<div
-							style={{
-								width: '1.2em',
-								marginRight: 10,
-								marginBottom: '-0.2em'
-							}}
-						>
-							<Image src={Play} alt="Google Play Store" draggable="false" />
-						</div>
-						Play Store
-					</button> */}
-					<div className="laptop flexbtn bro noselect">
-						<AppStoreBtn />
-						<PlayBtn />
-					</div>
+				<p>
+					The app brings one of the most requested features of Spotify to your
+					phone, without having to use the desktop app.
+				</p>
 
-					<div className="mob">
-						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
-					</div>
-					{/* <DownloadBtn dark /> */}
+				<div className="laptop flexbtn bro noselect">
+					<AppStoreBtn />
+					<PlayBtn />
+				</div>
+
+				<div className="mob">
+					{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
 				</div>
 			</div>
 
@@ -202,7 +228,6 @@ const Index = ({ deviceType }) => (
 						Let me know
 					</a>{' '}
 					any feedback or feature requests for the app.
-					{/*  Also{' '} */}
 				</p>
 
 				<div>
@@ -221,18 +246,29 @@ const Index = ({ deviceType }) => (
 						</div>
 						Behance
 					</button> */}
-					<DownloadBtn link={'https://arhn.us/spot-design'} />
+
+					<div className="laptop flexbtn smlbox bro noselect">
+						<DownloadBtn
+							className={'behance'}
+							link={'https://arhn.us/spot-design'}
+						/>
+					</div>
+					<div className="mob">
+						<DownloadBtn
+							className={'behance'}
+							link={'https://arhn.us/spot-design'}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div className="maingrid">
 			<div
-				className="block size6"
+				className="block size4"
 				style={{ backgroundColor: '#323232', color: '#fff' }}
 			>
-				<div className="one columns noselect">&nbsp;</div>
-				<div className="four columns">
+				<div className="six columns">
 					<h5 className="zero introdark" style={{ opacity: 0.5 }}>
 						Introducing
 					</h5>
@@ -261,25 +297,43 @@ const Index = ({ deviceType }) => (
 						<AppStoreBtn />
 						<PlayBtn />
 					</div>
-					<div className="mob">
+					<div style={{ marginBottom: 25 }} className="mob nightmode">
 						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
 					</div>
 				</div>
-				<div className="one columns noselect">&nbsp;</div>
 				<div className="six columns">
 					<div className="flex-center">
-						<div className="eight columns darkimg">
-							<Image
-								src={Dark}
-								alt="Spotivity in Dark Mode"
-								draggable={false}
-								placeholder="blur"
-							/>
-
-							<img src={Dark} alt="" />
-						</div>
+						<Image
+							src={Dark}
+							alt="Spotivity in Dark Mode"
+							draggable={false}
+							placeholder="blur"
+						/>
 					</div>
 					<div className="u-cf"></div>
+				</div>
+			</div>
+
+			<div
+				className="block size2 extra"
+				style={{ backgroundColor: '#FFDD00', padding: '2em 4em 2em 4em' }}
+			>
+				<br className="anti" />
+				<br className="anti" />
+				<img src="/buymeacoffee.png" className="supportlogo" alt="" />
+				<h2 className="zero" style={{ marginBottom: 5 }}>
+					Support
+				</h2>
+				<p>Support my journey in creating delightful web and mobile apps.</p>
+				<p>
+					Made with 🖤 by{' '}
+					<a href="https://arhaanb.com" target="_blank" className="suplink">
+						Arhaan Bahadur
+					</a>
+				</p>
+
+				<div className="supcont">
+					<SupportBtn />
 				</div>
 			</div>
 		</div>
