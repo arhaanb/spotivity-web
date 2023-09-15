@@ -19,10 +19,6 @@ function MyApp({ Component, pageProps }) {
 					href="https://fonts.gstatic.com"
 					crossOrigin="true"
 				/>
-				<link
-					href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Manrope:wght@400;600;700&display=swap"
-					rel="stylesheet"
-				/>
 
 				{/* SEO */}
 				<meta name="author" content={author} />
@@ -32,13 +28,13 @@ function MyApp({ Component, pageProps }) {
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:site" content="@arhaan_bahadur" />
 				<meta name="twitter:creator" content="@arhaan_bahadur" />
-				<meta property="og:url" content="https://spotivity.vercel.app" />
+				<meta property="og:url" content="https://spotivity.me/" />
 				<meta property="og:type" content="website" />
 				<meta property="og:title" content={title} />
 				<meta property="og:description" content={description} />
 				<meta
 					property="og:image"
-					content="https://spotivity.vercel.app/og.png"
+					content="https://spotivity.vercel.app/og_new.png"
 				/>
 				<meta property="og:image:alt" content={title} />
 				<meta property="og:image:width" content="1280" />
