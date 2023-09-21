@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import '../css/skeleton.css'
 import '../css/styles.scss'
+import Script from 'next/script'
+const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
 
 function MyApp({ Component, pageProps }) {
 	const description =
@@ -19,6 +21,20 @@ function MyApp({ Component, pageProps }) {
 					href="https://fonts.gstatic.com"
 					crossOrigin="true"
 				/>
+
+				{/* Google Analytics */}
+				<Script
+					src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+					strategy="afterInteractive"
+				/>
+				<Script id="google-analytics" strategy="afterInteractive">
+					{`
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){window.dataLayer.push(arguments);}
+						gtag('js', new Date());
+						gtag('config', '${GA_MEASUREMENT_ID}');
+					`}
+				</Script>
 
 				{/* SEO */}
 				<meta name="author" content={author} />
