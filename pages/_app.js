@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
+// import Link from 'next/link'
 import '../css/skeleton.css'
 import '../css/styles.scss'
 import Script from 'next/script'
@@ -7,7 +7,7 @@ const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
 
 function MyApp({ Component, pageProps }) {
 	const description =
-		'Spotivity — See what your Spotify friends are listening to on the go!'
+		'Check your Spotify Friend Activity from your phone! See what music your friends are listening to on the go, in realtime!'
 	const title = 'Spotivity'
 	const author = 'Arhaan Bahadur'
 
