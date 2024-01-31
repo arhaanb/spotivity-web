@@ -38,6 +38,7 @@ function SupportBtn() {
 				className="support btn"
 				href="https://buymeacoffee.com/arhaanb"
 				target="_blank"
+				style={{ width: '75%' }}
 			>
 				<div className="img">
 					<img
