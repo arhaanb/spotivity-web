@@ -4,6 +4,8 @@ import '../css/skeleton.css'
 import '../css/styles.scss'
 import Script from 'next/script'
 const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
+// import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from 'nextjs-google-analytics'
 
 function MyApp({ Component, pageProps }) {
 	const description =
@@ -13,6 +15,8 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 		<>
+			<GoogleAnalytics trackPageViews gaMeasurementId={GA_MEASUREMENT_ID} />
+
 			<Head>
 				<title>{title}</title>
 				<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,19 +26,29 @@ function MyApp({ Component, pageProps }) {
 					crossOrigin="true"
 				/>
 
+				{/* <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> */}
 				{/* Google Analytics */}
-				<Script
+				{/* <Script
 					src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
 					strategy="afterInteractive"
+					onLoad={() => {
+						console.log('Script has loaded')
+					}}
 				/>
-				<Script id="google-analytics" strategy="afterInteractive">
+				<Script
+					id="google-analytics"
+					strategy="afterInteractive"
+					onLoad={() => {
+						console.log('Script has loaded')
+					}}
+				>
 					{`
 						window.dataLayer = window.dataLayer || [];
 						function gtag(){window.dataLayer.push(arguments);}
 						gtag('js', new Date());
 						gtag('config', '${GA_MEASUREMENT_ID}');
 					`}
-				</Script>
+				</Script> */}
 
 				{/* SEO */}
 				<meta name="author" content={author} />
