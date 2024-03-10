@@ -77,7 +77,7 @@ function AppStoreBtn() {
 		<>
 			<a
 				className="apple btn"
-				href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960"
+				href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960?platform=iphone"
 				target="_blank"
 			>
 				<div className="img">
