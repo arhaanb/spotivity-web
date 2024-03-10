@@ -3,7 +3,7 @@ import Head from 'next/head'
 import '../css/skeleton.css'
 import '../css/styles.scss'
 import Script from 'next/script'
-// const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
+const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
 
 function MyApp({ Component, pageProps }) {
 	const description =
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
 				/>
 
 				{/* Google Analytics */}
-				{/* <Script
+				<Script
 					src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
 					strategy="afterInteractive"
 				/>
@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
 						gtag('js', new Date());
 						gtag('config', '${GA_MEASUREMENT_ID}');
 					`}
-				</Script> */}
+				</Script>
 
 				{/* SEO */}
 				<meta name="author" content={author} />
