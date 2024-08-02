@@ -509,10 +509,18 @@ a.btn {
 
 	.respcols {
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		justify-content: flex-start;
+		align-items: flex-start;
 		flex-direction: column;
-		text-align: center;
+		text-align: left;
+
+		h1 {
+			font-size: 2.25em !important;
+		}
+	}
+
+	.brandimg {
+		width: 60%;
 	}
 
 	.brandimgclass {
