@@ -47,7 +47,7 @@ img {
 	margin: 0;
 	padding: 0;
 	font-weight: 400;
-	font-family: 'Manrope';
+	font-family: 'General Sans', sans-serif;
 }
 
 h1,
@@ -56,7 +56,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: 700;
+	font-weight: 600;
 }
 
 p {
@@ -368,6 +368,7 @@ a:hover {
 	color: rgb(0, 0, 0);
 	font-weight: 800;
 	transition: 0.2s;
+
 	&:hover {
 		opacity: 0.6;
 	}

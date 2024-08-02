@@ -19,11 +19,16 @@ function MyApp({ Component, pageProps }) {
 
 			<Head>
 				<title>{title}</title>
-				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				{/* <link rel="preconnect" href="https://fonts.googleapis.com" />
 				<link
 					rel="preconnect"
 					href="https://fonts.gstatic.com"
 					crossOrigin="true"
+				/> */}
+
+				<link
+					href="https://api.fontshare.com/v2/css?f[]=general-sans@1,2&display=swap"
+					rel="stylesheet"
 				/>
 
 				{/* <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> */}
