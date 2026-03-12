@@ -1,27 +1,27 @@
 {
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start"
-	},
-	"prettier": {
-		"tabWidth": 2,
-		"useTabs": true,
-		"semi": false,
-		"singleQuote": true,
-		"trailingComma": "none"
-	},
-	"dependencies": {
-		"@next/third-parties": "^14.1.3",
-		"axios": "^0.24.0",
-		"eslint-config-next": "^13.5.6",
-		"mongoose": "^6.12.6",
-		"next": "^14.1.3",
-		"nextjs-google-analytics": "^2.3.3",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"sass": "^1.70.0",
-		"sharp": "^0.32.6"
-	}
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": true,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "dependencies": {
+    "@next/third-parties": "^14.1.3",
+    "axios": "^0.24.0",
+    "eslint-config-next": "^13.5.6",
+    "mongoose": "^6.12.6",
+    "next": "14.2.35",
+    "nextjs-google-analytics": "^2.3.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.70.0",
+    "sharp": "^0.32.6"
+  }
 }
