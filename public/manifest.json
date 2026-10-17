@@ -1,0 +1,12 @@
+{
+	"name": "Spotivity",
+	"short_name": "Spotivity",
+	"description": "See what your friends are listening to on Spotify in real time.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#FAF7F1",
+	"theme_color": "#3BCE90",
+	"icons": [
+		{ "src": "/brand/brand.png", "sizes": "512x512", "type": "image/png" }
+	]
+}

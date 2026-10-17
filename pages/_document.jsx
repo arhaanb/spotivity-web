@@ -1,17 +1,21 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-// import { GoogleAnalytics } from '@next/third-parties/google'
 
 export default function Document() {
 	return (
-		<Html>
+		<Html lang="en" className="bg-cream-100">
 			<Head>
-				{/* <link
-					href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Manrope:wght@400;600;700&display=swap"
+				<link rel="preconnect" href="https://fonts.googleapis.com" />
+				<link
+					rel="preconnect"
+					href="https://fonts.gstatic.com"
+					crossOrigin="anonymous"
+				/>
+				<link
+					href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
 					rel="stylesheet"
-				/> */}
-				{/* <GoogleAnalytics gaId="G-CBMMDK6CZ5" /> */}
+				/>
 			</Head>
-			<body>
+			<body className="bg-cream antialiased text-ink-900">
 				<Main />
 				<NextScript />
 			</body>

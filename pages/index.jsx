@@ -1,470 +1,406 @@
 import Link from 'next/link'
-import Mock from '../css/mock.png'
-import Main from '../css/main.png'
-import Brand from '../css/brand.svg'
-import Play from '../css/play.svg'
-import Apple from '../css/img/apple.svg'
-import Behance from '../css/behance.svg'
-import Logo from '../css/logo.svg'
-import Yuh from '../css/yuh.png'
-import Dark from '../css/darkmode.png'
-import Image from 'next/legacy/image'
-import AppleWhite from '../css/img/applewhite.svg'
-import PlayIcon from '../css/img/play.svg'
-import BigMock from '../css/img/mockup.png'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { ArrowRight, Zap, ShieldCheck, Smartphone, ChevronRight } from 'lucide-react'
 
-function PlayBtn() {
+import HeroBackdrop from '../components/HeroBackdrop'
+import PhoneFrame from '../components/PhoneFrame'
+import SectionHeader from '../components/SectionHeader'
+import SupportSection from '../components/SupportSection'
+import Logo from '../components/Logo'
+
+import Container from '../components/ui/Container'
+import Section from '../components/ui/Section'
+import Card from '../components/ui/Card'
+import StoreButtons from '../components/ui/StoreButtons'
+
+import HelloWidget from '../components/widgets/HelloWidget'
+import BestFriendWidget from '../components/widgets/BestFriendWidget'
+import TopSongsWidget from '../components/widgets/TopSongsWidget'
+import TopArtistsWidget from '../components/widgets/TopArtistsWidget'
+
+import { TESTIMONIALS, FAQS } from '../components/data/mockData'
+
+export default function Home() {
 	return (
 		<>
-			<a
-				className="play btn"
-				href="https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity"
-				target="_blank"
-			>
-				<div className="img">
-					<Image src={PlayIcon} alt="Google Play Store" draggable="false" />
-				</div>
-
-				<span>Google Play</span>
-			</a>
+			<Hero />
+			<ProductPreview />
+			<StatsBand />
+			<Testimonials />
+			<DarkSpotlight />
+			<FAQ />
+			<SupportSection />
+			<FinalCTA />
 		</>
 	)
 }
 
-function SupportBtn() {
+/* =====================================================
+	 HERO — title left, product right
+	 ===================================================== */
+function Hero() {
+	const ref = useRef(null)
+	const { scrollYProgress } = useScroll({
+		target: ref,
+		offset: ['start start', 'end start']
+	})
+	const yRight = useTransform(scrollYProgress, [0, 1], [0, -40])
+
 	return (
-		<>
-			<a
-				className="support btn"
-				href="https://buymeacoffee.com/arhaanb"
-				target="_blank"
-				style={{ width: '75%' }}
-			>
-				<div className="img">
-					<img
-						src="https://seeklogo.com/images/B/buy-me-a-coffee-logo-F1878A1EB2-seeklogo.com.png"
-						alt="Buy me a coffee"
-						draggable="false"
-					/>
-				</div>
+		<section
+			ref={ref}
+			className="relative isolate pt-32 md:pt-40 pb-8 md:pb-12 overflow-hidden"
+		>
+			<HeroBackdrop />
 
-				<span>Buy Me A Coffee</span>
-			</a>
-		</>
-	)
-}
-
-function DownloadBtn({ dark, className, link }) {
-	return (
-		<>
-			<a
-				className={`${className} ${dark ? 'apple' : 'play'} btn`}
-				href={link ? link : '/'}
-				target="_blank"
-			>
-				<div className="img">
-					<Image src={Behance} alt="Behance" draggable="false" />
-				</div>
-
-				<span>Behance</span>
-			</a>
-		</>
-	)
-}
-
-function AppStoreBtn() {
-	return (
-		<>
-			<a
-				className="apple btn"
-				href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960?platform=iphone"
-				target="_blank"
-			>
-				<div className="img">
-					<Image
-						className="img"
-						src={AppleWhite}
-						alt="Apple App Store"
-						draggable="false"
-					/>
-				</div>
-				{/* <img src="/spotivity/applewhite.svg" alt="" /> */}
-				<span>App Store</span>
-			</a>
-		</>
-	)
-}
-
-const Index = ({ deviceType }) => (
-	<>
-		<section className="container" id="mainp">
-			<br className="anti" />
-			<br className="anti" />
-			<div className="row">
-				<div className="six columns respcols">
-					<br className="anti" />
-					<br className="anti" />
-					<br className="anti" />
-					<br className="anti" />
-					<br className="anti" />
-					<br className="anti" />
-					<div className="brandimg">
-						<Image src={Brand} alt="Spotivity | Branding" draggable="false" />
-					</div>
-
-					<div>
-						<h1 style={{ marginBottom: 5, fontSize: 40, marginTop: 0 }}>
-							See what music your friends are listening to!
-						</h1>
-
-						<div
-						// className="parawidth"
-						>
-							{/* <p
-								style={{ fontSize: '1.2em' }}
-								// className="mainpara"
-							>
-								Check your Spotify friend activity right from your phone with
-								Spotivity.
-							</p> */}
-						</div>
-					</div>
-
-					<div
-						style={{ marginTop: 25 }}
-						className="flexbtn bro noselect laptop"
+			<Container className="grid lg:grid-cols-12 items-center gap-y-16 lg:gap-x-12">
+				<div className="lg:col-span-7 relative z-10">
+					<motion.h1
+						initial={{ opacity: 0, y: 18 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7, delay: 0.05 }}
+						className="title-mega text-balance max-w-[12ch]"
 					>
-						<AppStoreBtn />
-						<PlayBtn />
-					</div>
-					<div style={{ marginTop: 20, marginBottom: -15 }} className="mob">
-						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
-					</div>
-					<div className="u-cf"></div>
-				</div>
+						See what your <span className="emph">friends</span> are listening
+						to.
+					</motion.h1>
 
-				<div className="six columns">
-					<div
-						className="brandimgclass"
-						style={{ width: '87%', marginTop: '1.8em', marginLeft: '7.5%' }}
+					<motion.p
+						initial={{ opacity: 0, y: 16 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.7, delay: 0.15 }}
+						className="mt-6 max-w-[42ch] text-[1.1rem] leading-[1.6] text-ink-400 text-pretty"
 					>
-						<Image
-							src={BigMock}
-							alt="Spotivity mockup"
-							draggable="false"
-							placeholder="blur"
-						/>
-					</div>
+						A simple, beautiful way to share music with friends, plus your own
+						top songs and artists. On iOS and Android.
+					</motion.p>
+
+					<motion.div
+						initial={{ opacity: 0, y: 12 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.28 }}
+						className="mt-9"
+					>
+						<StoreButtons />
+						<p className="mt-5 text-sm text-ink-300">
+							<span className="font-semibold text-ink">100k+ downloads</span>
+							<span className="mx-2 text-ink/20">/</span>
+							Works with Spotify Free and Premium
+						</p>
+					</motion.div>
 				</div>
-			</div>
-		</section>
 
-		<div className="maingrid">
-			<div
-				className="block size2 extra"
-				style={{ backgroundColor: '#F6F6F6', padding: '2em 4em 2em 4em' }}
-			>
-				<Image
-					src={Mock}
-					alt="Spotivity mockup"
-					draggable={false}
-					placeholder="blur"
-				/>
-			</div>
-
-			<div className="block size2 extra" style={{ backgroundColor: '#F6F6F6' }}>
-				<br className="anti" />
-				<br className="anti" />
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'flex-start',
-						alignItems: 'center',
-						gap: '1em',
-						marginBottom: 10
-					}}
+				<motion.div
+					style={{ y: yRight }}
+					className="lg:col-span-5 relative"
 				>
-					{/* <img src="/huh.png" style={{ width: '3.5em' }} alt="" /> */}
-					<h2 className="zero" style={{ marginBottom: 5 }}>
-						Spotivity
-					</h2>
-				</div>
-				<p>
-					See what music your friends are listening to on the go! View your{' '}
-					<span className="bold">Friend Activity</span> and view your stats
-					&mdash; your <span className="bold">Top Songs and Artists</span> for
-					all time ranges!
-				</p>
+					<div className="relative mx-auto max-w-[330px]">
+						<PhoneFrame />
 
-				<p>
-					The app brings one of the most requested features of Spotify to your
-					phone, without having to use the desktop app.
-				</p>
-
-				<div className="laptop flexbtn bro noselect">
-					<AppStoreBtn />
-					<PlayBtn />
-				</div>
-
-				<div className="mob">
-					{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
-				</div>
-			</div>
-
-			<div className="block size2" style={{ backgroundColor: '#d1ffee' }}>
-				<div className="flex-center">
-					<div style={{ width: '62%', marginBottom: 10 }}>
-						<Image
-							src={Yuh}
-							alt="Grid of music artists"
-							draggable="false"
-							placeholder="blur"
-						/>
-					</div>
-				</div>
-				<h2 style={{ marginBottom: 5, marginTop: 5 }}>Design</h2>
-				<p>
-					Check out the thought process behind the logo and app.{' '}
-					<a href="https://arhaanb.com/explore#contact" target="_blank">
-						Let me know
-					</a>{' '}
-					any feedback or feature requests for the app.
-				</p>
-
-				<div>
-					{/* <button
-						className="behance"
-						onClick={() => window.open('https://arhn.us/spot-design')}
-					>
-						<div
-							style={{
-								width: '1.2em',
-								marginRight: 10,
-								marginBottom: '-0.2em'
-							}}
+						<motion.div
+							initial={{ opacity: 0, y: 18 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.6, duration: 0.7 }}
+							className="hidden sm:block absolute -left-8 md:-left-20 bottom-[12%] w-48 z-10 -rotate-3"
 						>
-							<Image src={Behance} alt="Behance" draggable="false" />
-						</div>
-						Behance
-					</button> */}
-
-					<div className="laptop flexbtn smlbox bro noselect">
-						<DownloadBtn
-							className={'behance'}
-							link={'https://arhn.us/spot-design'}
-						/>
+							<BestFriendWidget />
+						</motion.div>
 					</div>
-					<div className="mob">
-						<DownloadBtn
-							className={'behance'}
-							link={'https://arhn.us/spot-design'}
-						/>
-					</div>
-				</div>
-			</div>
-		</div>
+				</motion.div>
+			</Container>
+		</section>
+	)
+}
 
-		<div className="maingrid">
-			<div
-				className="block size4"
-				style={{ backgroundColor: '#323232', color: '#fff' }}
-			>
-				<div className="six columns">
-					<h5 className="zero introdark" style={{ opacity: 0.5 }}>
-						Introducing
-					</h5>
-					<h1>Night Mode</h1>
-					<p>
-						One of the most requested features for Spotivity is here. Reduce the
-						strain on your eyes by viewing your friend activity with the all
-						new, gorgeous dark theme.
-					</p>
-					{/* <button
-						className="darkbtn"
-						onClick={() => window.open('https://arhn.us/spotivity')}
-					>
-						<div
-							style={{
-								width: '1.2em',
-								marginRight: 10,
-								marginBottom: '-0.2em'
-							}}
+/* =====================================================
+	 PRODUCT PREVIEW — the three core screens + small print
+	 ===================================================== */
+function ProductPreview() {
+	const cards = [
+		{
+			kicker: 'Friend activity',
+			title: 'Who’s playing what, right now.',
+			body:
+				'A live feed of your friends’ listening. Tap any song or artist to open it in Spotify.',
+			Demo: () => <HelloWidget count={3} />
+		},
+		{
+			kicker: 'Top songs',
+			title: 'Your most-played, ranked.',
+			body:
+				'Your most-played tracks from the last 30 days or all-time, with album art and rankings.',
+			Demo: () => <TopSongsWidget />
+		},
+		{
+			kicker: 'Top artists',
+			title: 'The artists you’ve been deep in.',
+			body:
+				'Genres, follower counts, and one tap to their Spotify page.',
+			Demo: () => <TopArtistsWidget />
+		}
+	]
+	const extras = [
+		{
+			icon: Zap,
+			title: 'One-tap sign-in',
+			body: 'Log in with Spotify and your friends show up instantly.'
+		},
+		{
+			icon: ShieldCheck,
+			title: 'No ads',
+			body: 'No banners, no nag screens, and none of your data is stored.'
+		},
+		{
+			icon: Smartphone,
+			title: 'iOS and Android',
+			body: 'Works with both free and Premium Spotify accounts.'
+		}
+	]
+	return (
+		<Section>
+			<Container>
+				<SectionHeader
+					title={
+						<>
+							Three things you’ll <span className="emph">actually use</span>.
+						</>
+					}
+					lede="Everything Spotivity does, in three screens. No filler features, no settings maze."
+				/>
+
+				<div className="grid md:grid-cols-3 gap-5">
+					{cards.map((c, i) => (
+						<motion.div
+							key={c.kicker}
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, amount: 0.25 }}
+							transition={{ duration: 0.55, delay: i * 0.08 }}
 						>
-							<Image src={Play} alt="Google Play Store" draggable="false" />
-						</div>
-						Play Store
-					</button> */}
-					<div className="laptop flexbtn bro noselect">
-						<AppStoreBtn />
-						<PlayBtn />
-					</div>
-					<div style={{ marginBottom: 25 }} className="mob nightmode">
-						{deviceType == 'android' ? <PlayBtn /> : <AppStoreBtn />}
-					</div>
+							<Card className="h-full flex flex-col">
+								<span className="kicker">{c.kicker}</span>
+								<h3 className="mt-2 text-[1.35rem] leading-tight text-balance">
+									{c.title}
+								</h3>
+								<p className="mt-3 text-[0.95rem] text-ink-400">{c.body}</p>
+								<div className="mt-auto pt-8">
+									<c.Demo />
+								</div>
+							</Card>
+						</motion.div>
+					))}
 				</div>
-				<div className="six columns">
-					<div className="flex-center">
-						<Image
-							src={Dark}
-							alt="Spotivity in Dark Mode"
-							draggable={false}
-							placeholder="blur"
-						/>
-					</div>
-					<div className="u-cf"></div>
-				</div>
-			</div>
 
-			<div
-				className="block size2 extra"
-				style={{ backgroundColor: '#FFDD00', padding: '2em 4em 2em 4em' }}
-			>
-				<br className="anti" />
-				<br className="anti" />
-				<img src="/buymeacoffee.png" className="supportlogo" alt="" />
-				<h2 className="zero" style={{ marginBottom: 5 }}>
-					Support
-				</h2>
-				<p>Support my journey in creating delightful web and mobile apps.</p>
-				<p>
-					Made with 🖤 by{' '}
-					<a href="https://arhaanb.com" target="_blank" className="suplink">
-						Arhaan Bahadur
-					</a>
-				</p>
-
-				<div className="supcont">
-					<SupportBtn />
-				</div>
-			</div>
-		</div>
-
-		<div className="maingrid">
-			<div className="footer size6">
-				<div className="row">
-					<div className="four columns">
-						<h6>Spotivity</h6>
-						{/* <p>Check your Spotify friend activity.</p> */}
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'flex-start',
-								alignItems: 'center'
-							}}
-						>
-							<div style={{ width: '3em', marginRight: 12, marginTop: '5px' }}>
-								<Image src={Logo} alt="Spotivity logo" draggable="false" />
+				<div className="mt-14 grid sm:grid-cols-3 gap-8 sm:gap-6">
+					{extras.map((e) => (
+						<div key={e.title} className="flex gap-4">
+							<div className="shrink-0 w-10 h-10 rounded-full bg-mint-100 text-mint-700 grid place-items-center">
+								<e.icon className="w-[18px] h-[18px]" strokeWidth={1.75} />
 							</div>
 							<div>
-								<p>
-									<Link
-										href="https://open.spotify.com/user/arhaanb"
-										target="_blank"
-									>
-										Follow me on Spotify!
-									</Link>
-								</p>
-								<p>
-									Made by{' '}
-									<Link href="https://arhaanb.com" target="_blank">
-										Arhaan Bahadur
-									</Link>
-								</p>
+								<h4 className="text-[1rem] tracking-tight leading-snug">
+									{e.title}
+								</h4>
+								<p className="mt-1 text-[0.92rem] text-ink-400">{e.body}</p>
 							</div>
 						</div>
-					</div>
-					<div className="four columns">
-						<h6>Links</h6>
-						<p>
-							<Link href="/api/spotify">API</Link>
-						</p>
-						<p>
-							<Link href="/users">Analytics</Link>
-						</p>
-						<p>
-							<a
-								href={
-									process.env.NODE_ENV == 'production'
-										? '/privacy'
-										: `/privacy.html`
-								}
-							>
-								Privacy Policy
-							</a>
-						</p>
-					</div>
-
-					<div className="four columns">
-						<h6>External</h6>
-						<p>
-							<a
-								href="https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960"
-								target="_blank"
-							>
-								App Store
-							</a>
-						</p>
-						<p>
-							<a
-								href="https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity"
-								target="_blank"
-							>
-								Google Play Store
-							</a>
-						</p>
-						<p>
-							<a href="https://arhn.us/spot-design" target="_blank">
-								Behance
-							</a>
-						</p>
-						{/* <p>
-							<a
-								href="https://github.com/arhaanb/spotivity-web"
-								target="_blank"
-							>
-								GitHub
-							</a>
-						</p> */}
-					</div>
+					))}
 				</div>
-			</div>
-		</div>
-	</>
-)
-
-Index.getInitialProps = async ({ req, res }) => {
-	// Redirect to another page
-	function getOS(uaid) {
-		// Windows Phone must come first because its UA also contains "Android"
-		// if (/windows phone/i.test(uaid)) {
-		// 	return 'Windows Phone'
-		// }
-
-		if (/android/i.test(uaid)) {
-			return 'android'
-		}
-
-		// iOS detection from: http://stackoverflow.com/a/9039885/177710
-		if (/iPad|iPhone|iPod/.test(uaid)) {
-			return 'ios'
-		}
-
-		return 'unknown'
-	}
-
-	let userAgent
-	if (req) {
-		// if you are on the server and you get a 'req' property from your context
-		userAgent = req.headers['user-agent'] // get the user-agent from the headers
-	} else {
-		userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
-	}
-
-	// const userAgent = req.headers['user-agent']
-
-	const deviceType = getOS(userAgent)
-
-	return { deviceType: deviceType || 'unknown' }
+			</Container>
+		</Section>
+	)
 }
 
-export default Index
+/* =====================================================
+	 STATS BAND — real numbers and product facts only
+	 ===================================================== */
+function StatsBand() {
+	const stats = [
+		{ n: '100k+', label: 'people sharing what they play' },
+		{ n: '10 sec', label: 'from download to your friends’ feed' },
+		{ n: '1 tap', label: 'to play what they’re playing in Spotify' }
+	]
+	return (
+		<Section bg="mint" tight>
+			<Container>
+				<div className="grid sm:grid-cols-3 gap-y-10 sm:divide-x divide-ink/10">
+					{stats.map((s) => (
+						<div key={s.label} className="text-center px-6">
+							<div className="font-bold text-[clamp(2.6rem,5vw,3.75rem)] leading-none tracking-[-0.04em] tabular-nums">
+								{s.n}
+							</div>
+							<div className="mt-3 text-[0.95rem] text-ink/70 font-medium">
+								{s.label}
+							</div>
+						</div>
+					))}
+				</div>
+			</Container>
+		</Section>
+	)
+}
+
+/* =====================================================
+	 TESTIMONIALS
+	 ===================================================== */
+function Testimonials() {
+	return (
+		<Section>
+			<Container>
+				<SectionHeader
+					title={
+						<>
+							What people are <span className="emph">saying</span>.
+						</>
+					}
+				/>
+
+				<div className="columns-1 md:columns-2 lg:columns-3 gap-5">
+					{TESTIMONIALS.map((t, i) => (
+						<motion.figure
+							key={i}
+							initial={{ opacity: 0, y: 16 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, amount: 0.3 }}
+							transition={{ duration: 0.5, delay: (i % 3) * 0.06 }}
+							className="mb-5 break-inside-avoid"
+						>
+							<Card>
+								<blockquote className="text-[1.05rem] leading-[1.5] font-medium text-ink text-pretty">
+									“{t.quote}”
+								</blockquote>
+								<figcaption className="mt-5 flex items-baseline justify-between gap-4 text-[0.8rem]">
+									<span className="font-semibold text-ink">{t.author}</span>
+									<span className="text-ink-300">{t.role}</span>
+								</figcaption>
+							</Card>
+						</motion.figure>
+					))}
+				</div>
+			</Container>
+		</Section>
+	)
+}
+
+/* =====================================================
+	 DARK MODE — the same widgets, in the dark theme
+	 ===================================================== */
+function DarkSpotlight() {
+	return (
+		<Section tight>
+			<Container>
+				<div className="relative isolate rounded-5xl overflow-hidden bg-ink text-mint-50">
+					<div
+						aria-hidden
+						className="absolute -z-10 top-1/2 right-[8%] -translate-y-1/2 w-[520px] h-[520px] rounded-full bg-mint/20 blur-[130px]"
+					/>
+					<div className="grid md:grid-cols-2 gap-12 md:gap-8 p-8 sm:p-12 md:p-16 items-center">
+						<div>
+							<span className="kicker !text-mint">Dark theme</span>
+							<h2 className="mt-3 title-lg text-mint-50 text-balance">
+								Made for listening at <span className="emph">2 a.m.</span>
+							</h2>
+							<p className="mt-5 lede text-mint-50/65">
+								True-black dark mode with mint accents. Easy on the eyes on the
+								late train home.
+							</p>
+						</div>
+						<div className="relative mx-auto w-full max-w-[300px] py-4">
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, amount: 0.4 }}
+								transition={{ duration: 0.6 }}
+								className="relative w-[86%] -rotate-2"
+							>
+								<BestFriendWidget dark />
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, amount: 0.4 }}
+								transition={{ duration: 0.6, delay: 0.12 }}
+								className="relative w-[86%] ml-auto mt-4 rotate-2"
+							>
+								<TopSongsWidget dark />
+							</motion.div>
+						</div>
+					</div>
+				</div>
+			</Container>
+		</Section>
+	)
+}
+
+/* =====================================================
+	 FAQ
+	 ===================================================== */
+function FAQ() {
+	return (
+		<Section>
+			<Container className="max-w-3xl">
+				<SectionHeader
+					align="center"
+					title={
+						<>
+							Frequently <span className="emph">asked</span>.
+						</>
+					}
+				/>
+
+				<Card flush>
+					<div className="divide-y divide-ink/[0.07]">
+						{FAQS.slice(0, 6).map((f) => (
+							<details key={f.q} className="group">
+								<summary className="cursor-pointer list-none flex items-center gap-5 px-6 py-5 md:px-8 md:py-6 hover:bg-cream-100 transition-colors">
+									<span className="flex-1 font-semibold text-[1.02rem] tracking-tight">
+										{f.q}
+									</span>
+									<ChevronRight className="w-4 h-4 text-ink-300 transition-transform group-open:rotate-90 shrink-0" />
+								</summary>
+								<div className="px-6 md:px-8 pb-6 -mt-1 text-[0.97rem] text-ink-400 leading-relaxed max-w-[60ch]">
+									{f.a}
+								</div>
+							</details>
+						))}
+					</div>
+				</Card>
+
+				<div className="mt-8 text-center">
+					<Link
+						href="/faq"
+						className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-mint-700 transition-colors"
+					>
+						All questions <ArrowRight className="w-4 h-4" />
+					</Link>
+				</div>
+			</Container>
+		</Section>
+	)
+}
+
+/* =====================================================
+	 FINAL CTA
+	 ===================================================== */
+function FinalCTA() {
+	return (
+		<Section tight id="download" className="scroll-mt-20">
+			<Container>
+				<div className="rounded-5xl bg-mint relative overflow-hidden">
+					<div className="relative py-16 md:py-20 px-6 text-center">
+						<Logo className="mx-auto mb-7 w-16 h-16 rounded-full ring-1 ring-ink/10 shadow-float" />
+						<h2 className="title-xl text-balance max-w-[16ch] mx-auto">
+							Your friends are already on it.
+						</h2>
+						<p className="mt-4 text-ink/70 text-[1.05rem] max-w-[40ch] mx-auto text-balance">
+							Download Spotivity and see what your people are playing right
+							now.
+						</p>
+						<StoreButtons center className="mt-9" />
+					</div>
+				</div>
+			</Container>
+		</Section>
+	)
+}

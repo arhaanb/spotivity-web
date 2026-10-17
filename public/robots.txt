@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /users
+Disallow: /link
+Disallow: /download-test
+
+Sitemap: https://spotivity.me/sitemap.xml
