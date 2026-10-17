@@ -55,7 +55,7 @@ export default function Press() {
 			<Section tight>
 				<Container>
 					<div className="grid md:grid-cols-3 gap-6">
-						<StatCard n="100k+" label="downloads" />
+						<StatCard n="160k+" label="downloads" />
 						<StatCard n="iOS + Android" label="platforms" />
 						<StatCard n="2022" label="launched" />
 					</div>

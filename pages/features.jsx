@@ -117,7 +117,7 @@ export default function Features() {
 						Try it <span className="emph">today</span>.
 					</h2>
 					<p className="mt-4 lede mx-auto text-ink-400">
-						100k+ downloads on iOS and Android.
+						160k+ downloads on iOS and Android.
 					</p>
 					<StoreButtons center className="mt-8" />
 						<Link

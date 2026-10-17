@@ -13,7 +13,7 @@ const SITE_URL = 'https://spotivity.me'
 function MyApp({ Component, pageProps }) {
 	const router = useRouter()
 	const description =
-		'Spotivity is the Gen Z music sharing app — see what your friends are listening to on Spotify in real time, plus your own top songs and artists. Beautiful dark theme, no ads. 100k+ downloads.'
+		'Spotivity is the Gen Z music sharing app — see what your friends are listening to on Spotify in real time, plus your own top songs and artists. Beautiful dark theme, no ads. 160k+ downloads.'
 	const title = 'Spotivity — See what your friends are listening to'
 	const canonical = `${SITE_URL}${router.asPath.split('?')[0] || ''}`
 

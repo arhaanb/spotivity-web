@@ -84,7 +84,7 @@ function Hero() {
 					>
 						<StoreButtons />
 						<p className="mt-5 text-sm text-ink-300">
-							<span className="font-semibold text-ink">100k+ downloads</span>
+							<span className="font-semibold text-ink">160k+ people using it</span>
 							<span className="mx-2 text-ink/20">/</span>
 							Works with Spotify Free and Premium
 						</p>
@@ -217,14 +217,13 @@ function ProductPreview() {
 	 ===================================================== */
 function StatsBand() {
 	const stats = [
-		{ n: '100k+', label: 'people sharing what they play' },
-		{ n: '10 sec', label: 'from download to your friends’ feed' },
-		{ n: '1 tap', label: 'to play what they’re playing in Spotify' }
+		{ n: '160k+', label: 'people sharing what they’re listening to' },
+		{ n: '4.1★', label: 'rating on the App Store' }
 	]
 	return (
 		<Section bg="mint" tight>
 			<Container>
-				<div className="grid sm:grid-cols-3 gap-y-10 sm:divide-x divide-ink/10">
+				<div className="grid sm:grid-cols-2 gap-y-10 sm:divide-x divide-ink/10 max-w-3xl mx-auto">
 					{stats.map((s) => (
 						<div key={s.label} className="text-center px-6">
 							<div className="font-bold text-[clamp(2.6rem,5vw,3.75rem)] leading-none tracking-[-0.04em] tabular-nums">

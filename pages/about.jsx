@@ -13,14 +13,14 @@ export default function About() {
 				<title>About — Spotivity</title>
 				<meta
 					name="description"
-					content="The story behind Spotivity — a one-person indie music app that grew to 100k+ downloads."
+					content="The story behind Spotivity — a one-person indie music app that grew to 160k+ downloads."
 				/>
 				<link rel="canonical" href="https://spotivity.me/about" />
 			</Head>
 
 			<PageHeader
 				title="A small app, a big audience."
-				subtitle="Spotivity started as a weekend project. Today it has 100k+ downloads and counting."
+				subtitle="Spotivity started as a weekend project. Today it has 160k+ downloads and counting."
 				breadcrumbs={[
 					{ label: 'Home', href: '/' },
 					{ label: 'About' }
@@ -78,7 +78,7 @@ export default function About() {
 						className="grid grid-cols-3 gap-6 max-w-3xl mx-auto"
 					>
 						{[
-							['100k+', 'downloads'],
+							['160k+', 'downloads'],
 							['2022', 'launched'],
 							['1', 'person behind it'],
 						].map(([n, l]) => (
