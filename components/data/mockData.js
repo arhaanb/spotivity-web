@@ -158,7 +158,7 @@ export const FAQS = [
 	},
 	{
 		q: 'Is Spotivity free to download?',
-		a: 'Yes — Spotivity is free to download on iOS and Android, and there are no ads. Optional tips via Buy Me a Coffee help keep it running.'
+		a: 'Yes — Spotivity is free to download on iOS and Android, and there are no ads. Optional donations help support development and keep it running.'
 	},
 	{
 		q: 'Do I need Spotify Premium?',
