@@ -25,6 +25,7 @@
     "mongoose": "^6.12.6",
     "next": "^16.2.6",
     "nextjs-google-analytics": "^2.3.3",
+    "qrcode": "1.5.4",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "sass": "^1.70.0",
