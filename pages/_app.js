@@ -49,47 +49,47 @@ function MyApp({ Component, pageProps }) {
 			<GoogleAnalytics trackPageViews gaMeasurementId={GA_MEASUREMENT_ID} />
 
 			<Head>
-				<title>{title}</title>
+				<title key="title">{title}</title>
 				<meta charSet="utf-8" />
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1, viewport-fit=cover"
 				/>
 
-				<link rel="canonical" href={canonical} />
+				<link key="canonical" rel="canonical" href={canonical} />
 
-				<meta name="author" content="Arhaan Bahadur" />
-				<meta name="robots" content="index, follow, max-image-preview:large" />
-				<meta name="googlebot" content="index, follow" />
-				<meta name="description" content={description} />
+				<meta key="author" name="author" content="Arhaan Bahadur" />
+				<meta key="robots" name="robots" content="index, follow, max-image-preview:large" />
+				<meta key="googlebot" name="googlebot" content="index, follow" />
+				<meta key="description" name="description" content={description} />
 				<meta
 					name="keywords"
 					content="spotify friend activity, music sharing app, gen z music app, spotify friends, music discovery, top songs, top artists, music sharing"
 				/>
 
-				<meta name="apple-itunes-app" content="app-id=6444594960" />
+				<meta key="apple-itunes-app" name="apple-itunes-app" content="app-id=6444594960" />
 				<meta
 					name="google-play-app"
 					content="app-id=com.arhaanb.spotifyactivity"
 				/>
-				<meta name="theme-color" content="#0A0A0B" />
+				<meta key="theme-color" name="theme-color" content="#0A0A0B" />
 
-				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@arhaan_bahadur" />
-				<meta name="twitter:creator" content="@arhaan_bahadur" />
-				<meta name="twitter:title" content={title} />
-				<meta name="twitter:description" content={description} />
-				<meta name="twitter:image" content={`${SITE_URL}/og_new.png`} />
+				<meta key="twitter:card" name="twitter:card" content="summary_large_image" />
+				<meta key="twitter:site" name="twitter:site" content="@arhaan_bahadur" />
+				<meta key="twitter:creator" name="twitter:creator" content="@arhaan_bahadur" />
+				<meta key="twitter:title" name="twitter:title" content={title} />
+				<meta key="twitter:description" name="twitter:description" content={description} />
+				<meta key="twitter:image" name="twitter:image" content={`${SITE_URL}/og_new.png`} />
 
-				<meta property="og:site_name" content="Spotivity" />
-				<meta property="og:url" content={canonical} />
-				<meta property="og:type" content="website" />
-				<meta property="og:title" content={title} />
-				<meta property="og:description" content={description} />
-				<meta property="og:image" content={`${SITE_URL}/og_new.png`} />
-				<meta property="og:image:alt" content="Spotivity app preview" />
-				<meta property="og:image:width" content="1280" />
-				<meta property="og:image:height" content="720" />
+				<meta key="og:site_name" property="og:site_name" content="Spotivity" />
+				<meta key="og:url" property="og:url" content={canonical} />
+				<meta key="og:type" property="og:type" content="website" />
+				<meta key="og:title" property="og:title" content={title} />
+				<meta key="og:description" property="og:description" content={description} />
+				<meta key="og:image" property="og:image" content={`${SITE_URL}/og_new.png`} />
+				<meta key="og:image:alt" property="og:image:alt" content="Spotivity app preview" />
+				<meta key="og:image:width" property="og:image:width" content="1280" />
+				<meta key="og:image:height" property="og:image:height" content="720" />
 
 				<link rel="icon" href="/favicon.ico" type="image/ico" />
 				<link rel="shortcut icon" href="/favicon.ico" />

@@ -1,0 +1,16 @@
+{
+	"applinks": {
+		"details": [
+			{
+				"appIDs": [
+					"CYDRQ78RDV.com.arhaanb.spotivity",
+					"CYDRQ78RDV.com.arhaanb.spotivitydev"
+				],
+				"components": [
+					{ "/": "/@*", "comment": "Profile / invite links" },
+					{ "/": "/u/*", "comment": "Same, after the rewrite" }
+				]
+			}
+		]
+	}
+}

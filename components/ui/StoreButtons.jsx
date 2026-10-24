@@ -1,3 +1,6 @@
+import { useEffect, useRef, useState } from 'react'
+import { QrCode } from 'lucide-react'
+
 // Official-style store badges. One size, one look, used everywhere.
 export const APP_STORE =
 	'https://apps.apple.com/us/app/spotivity-friend-activity/id6444594960'
@@ -63,7 +66,57 @@ export function GooglePlayButton({ className = '' }) {
 	)
 }
 
-export default function StoreButtons({ className = '', center = false }) {
+// Desktop only: a QR for spotivity.me/get, which sends a phone to its store.
+export function QrButton() {
+	const [open, setOpen] = useState(false)
+	const ref = useRef(null)
+
+	useEffect(() => {
+		if (!open) return
+		const close = (e) => {
+			if (e.type === 'keydown' ? e.key === 'Escape' : !ref.current?.contains(e.target))
+				setOpen(false)
+		}
+		document.addEventListener('mousedown', close)
+		document.addEventListener('keydown', close)
+		return () => {
+			document.removeEventListener('mousedown', close)
+			document.removeEventListener('keydown', close)
+		}
+	}, [open])
+
+	return (
+		<div ref={ref} className="relative hidden md:block">
+			<button
+				type="button"
+				onClick={() => setOpen((o) => !o)}
+				aria-expanded={open}
+				aria-label="Show QR code to download on your phone"
+				className="h-[54px] w-[54px] rounded-[14px] bg-black text-white ring-1 ring-inset ring-white/15 flex items-center justify-center transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#1c1c1e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint"
+			>
+				<QrCode size={22} />
+			</button>
+			{open && (
+				<div className="absolute left-1/2 bottom-full z-50 mb-3 w-60 -translate-x-1/2 rounded-3xl bg-white p-5 text-center shadow-float ring-1 ring-ink-900/5">
+					<img
+						src="/qr/get.svg"
+						alt="QR code for spotivity.me/get"
+						className="mx-auto h-40 w-40"
+						draggable="false"
+					/>
+					<p className="mt-4 text-sm font-semibold text-ink-900">
+						Scan to get the app
+					</p>
+					<p className="mt-0.5 text-xs text-ink-300">
+						Opens the App Store or Google Play
+					</p>
+				</div>
+			)}
+		</div>
+	)
+}
+
+export default function StoreButtons({ className = '', center = false, qr = true }) {
 	return (
 		<div
 			className={`flex gap-3 ${
@@ -72,6 +125,7 @@ export default function StoreButtons({ className = '', center = false }) {
 		>
 			<AppStoreButton />
 			<GooglePlayButton />
+			{qr && <QrButton />}
 		</div>
 	)
 }
