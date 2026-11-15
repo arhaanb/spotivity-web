@@ -12,5 +12,6 @@ Steps:
    - Description body: short, concise bullet points summarizing what changed and why.
    - Allowed types: `feat:`, `fix:`, `refactor:`, `style:`, `chore:`, `docs:`, `perf:`, `test:`.
    - Keep the subject line under 72 characters.
+   - No `Co-Authored-By` trailer or any Claude/AI attribution.
 4. Commit the changes using a HEREDOC for the message.
 5. Push to the remote on the current branch.

@@ -1,36 +1,37 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import QRCode from 'qrcode'
-import { X } from 'lucide-react'
 
 import Home from '../index'
-import Logo from '../../components/Logo'
-import {
-	AppStoreButton,
-	GooglePlayButton
-} from '../../components/ui/StoreButtons'
+import { InviteAvatar } from '../../components/InviteLayer'
+import CopyCode from '../../components/ui/CopyCode'
+import { setInvite } from '../../lib/inviteStore'
 import {
 	APP_STORE,
 	PLAY_STORE,
+	SITE_URL,
 	androidIntentUrl,
+	appSchemeUrl,
 	cleanCode,
 	cleanHandle,
 	detectPlatform,
 	firstName,
+	displayName,
+	shownHandle,
 	getPublicProfile,
-	profileUrl,
-	SITE_URL
+	profileUrl
 } from '../../lib/invite'
 
 // spotivity.me/@handle?i=CODE (rewritten here from /@:handle).
 //
-// - App installed: iOS universal links / Android app links open the app
-//   before this page loads. If we do load on a phone (link pasted into the
-//   browser, or Android links not verified), we hand off: Android via an
-//   intent:// URL that falls back to Play, iOS straight to the App Store.
-// - Desktop: the normal home page with an invite card on top, with a QR code
-//   that carries the same link to a phone.
-// - Crawlers get the per-user OG tags and never run the redirect.
+// - Phones: try to open the app (spotivity:// scheme, works in every build),
+//   and if nothing picks it up, go to the App Store / Play Store. Once a
+//   build with universal links ships, iOS opens the app before this page
+//   even loads.
+// - Desktop: the normal home page with the invite dialog on top (and a
+//   persistent banner after closing it), incl. a QR that carries the link
+//   to a phone. Both live in components/InviteLayer, rendered by _app.
+// - Crawlers get the per-user OG tags and never run any of the JS.
 export async function getServerSideProps({ params, query, req, res }) {
 	const handle = cleanHandle(params.handle)
 	if (!handle) return { notFound: true }
@@ -47,52 +48,55 @@ export async function getServerSideProps({ params, query, req, res }) {
 		color: { dark: '#0F1B14', light: '#00000000' }
 	})
 
-	res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=300, stale-while-revalidate=3600'
-	)
+	// The response depends on the device, so it must never be shared from a
+	// CDN cache (a cached desktop page is what phones were getting).
+	res.setHeader('Cache-Control', 'private, no-store')
 	return {
 		props: {
-			profile,
-			code,
-			url,
-			qrSvg,
-			platform: detectPlatform(req.headers['user-agent'])
+			invite: {
+				handle: profile.handle,
+				name: profile.display_name ?? null,
+				image_url: profile.image_url ?? null,
+				code,
+				url,
+				qrSvg
+			},
+			serverPlatform: detectPlatform(req.headers['user-agent'])
 		}
 	}
 }
 
-export default function ProfileInvite({ profile, code, url, qrSvg, platform }) {
-	const name = profile.display_name || `@${profile.handle}`
-	const first = firstName(profile.display_name) || `@${profile.handle}`
+function clientPlatform() {
+	const ua = navigator.userAgent
+	if (/Android/i.test(ua)) return 'android'
+	if (/iPhone|iPad|iPod/i.test(ua)) return 'ios'
+	// iPadOS Safari identifies as a Mac; a touch screen gives it away.
+	if (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) return 'ios'
+	return 'desktop'
+}
+
+export default function ProfileInvite({ invite, serverPlatform }) {
+	const name = displayName({ display_name: invite.name, handle: invite.handle })
+	const first = invite.name ? firstName(invite.name) : name.startsWith('@') ? name : 'your friend'
 	const title = `${name} invited you to Spotivity`
 	const description = `See what ${first} is listening to on Spotify, live. Join Spotivity and you'll be friends instantly.`
-	const ogImage = `${SITE_URL}/api/og/${profile.handle}`
+	const ogImage = `${SITE_URL}/api/og/${invite.handle}`
 
-	const [open, setOpen] = useState(true)
-	const [redirecting, setRedirecting] = useState(platform !== 'desktop')
-
+	const [platform, setPlatform] = useState(serverPlatform)
 	useEffect(() => {
-		let target = null
-		if (platform === 'android') target = androidIntentUrl(profile.handle, code)
-		else if (platform === 'ios') target = APP_STORE
-		// iPadOS Safari identifies as a Mac; a touch screen gives it away.
-		else if (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent))
-			target = APP_STORE
-		if (!target) return
-		setRedirecting(true)
-		const t = setTimeout(() => window.location.replace(target), 350)
-		return () => clearTimeout(t)
-	}, [platform, profile.handle, code])
+		const p = clientPlatform()
+		setPlatform(p)
+		setInvite(invite, { open: p === 'desktop' })
+	}, [invite])
 
 	return (
 		<>
 			<Head>
 				<title key="title">{title}</title>
 				<meta key="description" name="description" content={description} />
-				<link key="canonical" rel="canonical" href={url} />
+				<link key="canonical" rel="canonical" href={invite.url} />
 				<meta key="robots" name="robots" content="noindex, follow" />
-				<meta key="og:url" property="og:url" content={url} />
+				<meta key="og:url" property="og:url" content={invite.url} />
 				<meta key="og:type" property="og:type" content="profile" />
 				<meta key="og:title" property="og:title" content={title} />
 				<meta key="og:description" property="og:description" content={description} />
@@ -106,166 +110,99 @@ export default function ProfileInvite({ profile, code, url, qrSvg, platform }) {
 				<meta
 					key="apple-itunes-app"
 					name="apple-itunes-app"
-					content={`app-id=6444594960, app-argument=${url}`}
+					content={`app-id=6444594960, app-argument=${invite.url}`}
 				/>
 			</Head>
 
-			{redirecting ? (
-				<MobileHandoff profile={profile} name={name} platform={platform} />
+			{platform === 'desktop' ? (
+				<Home />
 			) : (
-				<>
-					<Home />
-					{open && (
-						<InviteOverlay
-							profile={profile}
-							name={name}
-							first={first}
-							qrSvg={qrSvg}
-							onClose={() => setOpen(false)}
-						/>
-					)}
-				</>
+				<MobileHandoff invite={invite} name={name} platform={platform} />
 			)}
 		</>
 	)
 }
 
-function Avatar({ profile, name, className }) {
-	if (profile.image_url) {
-		return (
-			<img
-				src={profile.image_url}
-				alt=""
-				className={`${className} object-cover`}
-				draggable="false"
-			/>
-		)
-	}
-	return (
-		<div
-			className={`${className} flex items-center justify-center bg-mint-100 text-mint-700 font-display font-extrabold`}
-		>
-			{name.replace(/^@/, '').charAt(0).toUpperCase()}
-		</div>
-	)
-}
+// Phones: open the app if it's installed, otherwise the store.
+function MobileHandoff({ invite, name, platform }) {
+	const android = platform === 'android'
+	const store = android ? PLAY_STORE : APP_STORE
+	const openHref = android
+		? androidIntentUrl(invite.handle, invite.code)
+		: appSchemeUrl(invite.handle, invite.code)
+	const [status, setStatus] = useState('opening')
 
-function InviteOverlay({ profile, name, first, qrSvg, onClose }) {
 	useEffect(() => {
-		const onKey = (e) => e.key === 'Escape' && onClose()
-		window.addEventListener('keydown', onKey)
-		return () => window.removeEventListener('keydown', onKey)
-	}, [onClose])
+		// Android: the intent URL falls back to Play by itself.
+		if (android) {
+			window.location.href = openHref
+			return
+		}
+		// iOS: try the app; if we're still here (and visible) shortly after,
+		// it isn't installed, so go to the App Store. Leaving for the app hides
+		// the page, which cancels the fallback.
+		let timer = null
+		const cancel = () => {
+			if (document.visibilityState === 'hidden') {
+				clearTimeout(timer)
+				setStatus('opened')
+			}
+		}
+		document.addEventListener('visibilitychange', cancel)
+		window.location.href = openHref
+		timer = setTimeout(() => {
+			if (document.visibilityState === 'visible') {
+				setStatus('store')
+				window.location.replace(store)
+			}
+		}, 1600)
+		return () => {
+			clearTimeout(timer)
+			document.removeEventListener('visibilitychange', cancel)
+		}
+	}, [android, openHref, store])
 
 	return (
-		<div
-			className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-ink-950/45 backdrop-blur-md"
-			onClick={onClose}
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="invite-title"
-		>
-			<div
-				className="relative w-full max-w-[820px] rounded-4xl bg-cream-100 shadow-float ring-1 ring-ink-900/5 overflow-hidden grid md:grid-cols-[1.15fr_1fr]"
-				onClick={(e) => e.stopPropagation()}
-			>
-				<button
-					onClick={onClose}
-					aria-label="Close"
-					className="absolute right-4 top-4 z-10 h-9 w-9 rounded-full flex items-center justify-center text-ink-400 hover:bg-ink-900/5 hover:text-ink-900 transition-colors"
-				>
-					<X size={18} />
-				</button>
+		<div className="fixed inset-0 z-[120] overflow-y-auto bg-cream">
+			<div className="flex min-h-full flex-col items-center justify-center px-6 py-16 text-center">
+				<div className="relative">
+					<InviteAvatar invite={invite} className="h-24 w-24 text-4xl shadow-card" />
+					<span className="absolute bottom-0.5 right-0.5 h-5 w-5 rounded-full bg-mint ring-4 ring-cream" />
+				</div>
+				{shownHandle(invite.handle) && name !== `@${invite.handle}` ? (
+					<p className="mt-6 text-sm font-medium text-ink-300">@{invite.handle}</p>
+				) : (
+					<div className="mt-6" />
+				)}
+				<h1 className="mt-1 max-w-xs [overflow-wrap:anywhere] font-display text-[1.75rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink-900 text-balance">
+					{name} invited you to Spotivity
+				</h1>
+				<p className="mt-3 text-ink-400">
+					{status === 'store' ? 'Taking you to the store…' : 'Opening Spotivity…'}
+				</p>
 
-				{/* Who invited you */}
-				<div className="p-8 sm:p-10 flex flex-col justify-between gap-10">
-					<div className="flex items-center gap-2.5">
-						<Logo className="w-7 h-7" />
-						<span className="font-display font-bold text-ink-900 tracking-tight">
-							Spotivity
-						</span>
-					</div>
-
-					<div>
-						<div className="relative w-fit">
-							<Avatar
-								profile={profile}
-								name={name}
-								className="h-24 w-24 rounded-full ring-4 ring-cream-100 shadow-card text-4xl"
-							/>
-							<span className="absolute bottom-1 right-1 h-5 w-5 rounded-full bg-mint ring-4 ring-cream-100" />
-						</div>
-						<p className="mt-6 text-sm font-medium text-ink-300">
-							@{profile.handle}
-						</p>
-						<h2
-							id="invite-title"
-							className="mt-1 font-display text-3xl sm:text-[2.15rem] leading-[1.1] font-extrabold tracking-[-0.03em] text-ink-900"
-						>
-							{name} invited you to Spotivity
-						</h2>
-						<p className="mt-3 text-ink-400 leading-relaxed">
-							See what {first} is listening to, live. Download the app,
-							sign in with Spotify, and you’ll be friends automatically.
-						</p>
-					</div>
-
-					<button
-						onClick={onClose}
-						className="w-fit text-sm font-medium text-ink-400 hover:text-ink-900 transition-colors"
+				<div className="mt-10 flex w-full max-w-[280px] flex-col gap-3">
+					<a
+						href={openHref}
+						className="flex h-[52px] items-center justify-center rounded-full bg-ink-900 font-semibold text-cream"
 					>
-						Explore Spotivity first &rarr;
-					</button>
+						Open in Spotivity
+					</a>
+					<a
+						href={store}
+						className="flex h-[52px] items-center justify-center rounded-full bg-ink-900/[0.06] font-semibold text-ink-900"
+					>
+						{android ? 'Get it on Google Play' : 'Get it on the App Store'}
+					</a>
 				</div>
 
-				{/* Get the app */}
-				<div className="p-8 sm:p-10 bg-cream-200/70 border-t md:border-t-0 md:border-l border-ink-900/5 flex flex-col items-center justify-center text-center gap-6">
-					<div className="rounded-3xl bg-white p-5 shadow-card ring-1 ring-ink-900/5">
-						<div
-							className="h-44 w-44 [&>svg]:h-full [&>svg]:w-full"
-							dangerouslySetInnerHTML={{ __html: qrSvg }}
-							aria-label="QR code that opens this invite on your phone"
-							role="img"
-						/>
-					</div>
-					<div>
-						<p className="font-display font-bold text-ink-900">
-							Scan with your phone
-						</p>
-						<p className="mt-1 text-sm text-ink-300">
-							Opens the app, or the store if you don’t have it yet.
-						</p>
-					</div>
-					<div className="flex flex-col gap-2.5 w-full items-center">
-						<AppStoreButton className="!max-w-[200px] !w-[200px]" />
-						<GooglePlayButton className="!max-w-[200px] !w-[200px]" />
-					</div>
-				</div>
+				{invite.code && (
+					<p className="mt-8 max-w-xs text-sm leading-relaxed text-ink-400">
+						Installing first? Enter code{' '}
+						<CopyCode code={invite.code} /> in the app’s Friends screen.
+					</p>
+				)}
 			</div>
-		</div>
-	)
-}
-
-// Shown for a moment on phones while we hand off to the app or the store.
-function MobileHandoff({ profile, name, platform }) {
-	const store = platform === 'android' ? PLAY_STORE : APP_STORE
-	return (
-		<div className="fixed inset-0 z-[100] bg-cream flex flex-col items-center justify-center px-6 text-center">
-			<Avatar
-				profile={profile}
-				name={name}
-				className="h-24 w-24 rounded-full shadow-card text-4xl"
-			/>
-			<h1 className="mt-6 font-display text-2xl font-extrabold tracking-[-0.02em] text-ink-900">
-				{name} invited you to Spotivity
-			</h1>
-			<p className="mt-2 text-ink-400">Opening the app…</p>
-			<a
-				href={store}
-				className="mt-8 inline-flex h-12 items-center rounded-full bg-ink-900 px-6 font-semibold text-cream"
-			>
-				Get Spotivity
-			</a>
 		</div>
 	)
 }

@@ -8,16 +8,22 @@ export const PLAY_STORE =
 	'https://play.google.com/store/apps/details?id=com.arhaanb.spotifyactivity'
 
 const BADGE =
-	'group inline-flex items-center gap-3 h-[54px] flex-1 min-w-0 max-w-[180px] sm:flex-none sm:w-[180px] pl-3.5 pr-3 sm:pl-4 sm:pr-5 rounded-[14px] bg-black text-white ring-1 ring-inset ring-white/15 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#1c1c1e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint'
+	'group inline-flex items-center gap-3 h-[54px] min-w-0 px-4 rounded-[14px] bg-black text-white ring-1 ring-inset ring-white/15 transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-[#1c1c1e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint'
+// In a row: share the width on phones, fixed 180px from sm up.
+// block: fill the parent (stacked layouts), content centred.
+const width = (block) =>
+	block
+		? 'w-full justify-center'
+		: 'flex-1 max-w-[180px] sm:flex-none sm:w-[180px]'
 
-export function AppStoreButton({ className = '' }) {
+export function AppStoreButton({ className = '', block = false }) {
 	return (
 		<a
 			href={APP_STORE}
 			target="_blank"
 			rel="noopener"
 			aria-label="Download on the App Store"
-			className={`${BADGE} ${className}`}
+			className={`${BADGE} ${width(block)} ${className}`}
 		>
 			<img
 				src="/brand/apple-white.svg"
@@ -38,14 +44,14 @@ export function AppStoreButton({ className = '' }) {
 	)
 }
 
-export function GooglePlayButton({ className = '' }) {
+export function GooglePlayButton({ className = '', block = false }) {
 	return (
 		<a
 			href={PLAY_STORE}
 			target="_blank"
 			rel="noopener"
 			aria-label="Get it on Google Play"
-			className={`${BADGE} ${className}`}
+			className={`${BADGE} ${width(block)} ${className}`}
 		>
 			<img
 				src="/brand/play.svg"

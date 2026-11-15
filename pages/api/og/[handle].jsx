@@ -1,5 +1,12 @@
 import { ImageResponse } from 'next/og'
-import { cleanHandle, firstName, getPublicProfile } from '../../../lib/invite'
+import {
+	cleanHandle,
+	cleanName,
+	displayName,
+	firstName,
+	getPublicProfile,
+	shownHandle
+} from '../../../lib/invite'
 
 export const config = { runtime: 'edge' }
 
@@ -20,13 +27,71 @@ async function loadFont(weight) {
 	}
 }
 
-export default async function handler(req) {
-	const { pathname, origin } = new URL(req.url)
-	const handle = cleanHandle(decodeURIComponent(pathname.split('/').pop()))
-	const profile = handle ? await getPublicProfile(handle).catch(() => null) : null
+// Satori only has glyphs for real letters (any script, fetched on demand) and
+// emoji (twemoji). Decorative names like "⊹˚.⋆꒰𝐅𝖗𝖎𝐲𝖔𝖚𝐤𝖎♱🐈‍⬛꒱" would draw as
+// boxes: NFKC turns the styled letters back into plain ones, and the symbols
+// with no glyph are dropped. Null if nothing readable is left.
+function drawable(name) {
+	if (!name) return null
+	let s = name
+		.normalize('NFKC')
+		.replace(/[^\p{L}\p{M}\p{N}\p{Extended_Pictographic}‍️\s.'’\-_&!?,()]/gu, '')
+		.replace(/\p{Lm}/gu, '')
+	// A Latin name sprinkled with other scripts' letters as decoration (ა, ໒):
+	// keep the Latin. Names written in another script are left alone.
+	if (/\p{Script=Latin}/u.test(s)) {
+		s = s.replace(/[\p{L}\p{N}]/gu, (c) =>
+			/[\p{Script=Latin}\p{Script=Common}]/u.test(c) ? c : ''
+		)
+	}
+	s = s
+		// Accents only count on a letter (NFKC turns "˚" into a bare ring).
+		.replace(/(^|[^\p{L}\p{N}\p{M}])\p{M}+/gu, '$1')
+		.replace(/\s+/g, ' ')
+		.replace(/^[\s.\-_,]+|[\s.\-_,]+$/g, '')
+	return /[\p{L}\p{N}]/u.test(s) ? s : null
+}
 
-	const name = profile?.display_name || (profile ? `@${profile.handle}` : 'A friend')
-	const first = profile ? firstName(profile.display_name) : 'your friends'
+// Cut to n characters (not UTF-16 units, so emoji survive) with an ellipsis.
+function clip(s, n) {
+	const chars = [...s]
+	return chars.length > n ? `${chars.slice(0, n - 1).join('').trimEnd()}…` : s
+}
+
+export default async function handler(req) {
+	const { pathname, origin, searchParams } = new URL(req.url)
+	const requested = cleanHandle(decodeURIComponent(pathname.split('/').pop()))
+	let profile = requested ? await getPublicProfile(requested).catch(() => null) : null
+	// Dev only: /api/og/x?name=…&as=<handle> previews any name without a
+	// profile (`handle` itself is taken by the route param).
+	if (process.env.NODE_ENV !== 'production' && searchParams.has('name')) {
+		profile = {
+			display_name: cleanName(searchParams.get('name')),
+			handle: searchParams.get('as') ?? requested,
+			image_url: null
+		}
+	}
+
+	// Names are cleaned in getPublicProfile (Spotify ids become null). Very
+	// long ones are cut, and the headline shrinks to fit its longest word.
+	if (profile) profile = { ...profile, display_name: drawable(profile.display_name) }
+	const full = profile ? displayName(profile) : 'A friend'
+	const name = clip(full, 26)
+	const handle = profile ? shownHandle(profile.handle) : null
+	const first = !profile
+		? 'your friends'
+		: profile.display_name
+		? firstName(name)
+		: handle
+		? `@${handle}`
+		: 'your friend'
+	const firstShort = clip(first, 18)
+	const headline = `${name} invited you`
+	const longestWord = Math.max(...headline.split(/\s+/).map((w) => [...w].length))
+	// ~0.6em per glyph at weight 800; the headline gets 560px so it clears the rings.
+	const headlineSize = Math.round(
+		Math.max(42, Math.min(headline.length > 30 ? 54 : headline.length > 18 ? 64 : 76, 560 / (longestWord * 0.6)))
+	)
 	const [bold, medium] = await Promise.all([loadFont(800), loadFont(500)])
 	const fonts = [
 		bold && { name: 'Jakarta', data: bold, weight: 800, style: 'normal' },
@@ -110,7 +175,7 @@ export default async function handler(req) {
 						/>
 					) : (
 						<div style={{ fontSize: 150, fontWeight: 800, color: '#1F9866' }}>
-							{name.replace(/^@/, '').charAt(0).toUpperCase()}
+							{[...name.replace(/^@/, '')][0]?.toUpperCase() ?? 'S'}
 						</div>
 					)}
 				</div>
@@ -152,22 +217,25 @@ export default async function handler(req) {
 					</div>
 
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						{profile && (
+						{handle && name !== `@${handle}` && (
 							<div style={{ fontSize: 30, fontWeight: 500, color: '#7A857F' }}>
-								{`@${profile.handle}`}
+								{`@${handle}`}
 							</div>
 						)}
 						<div
 							style={{
 								marginTop: 10,
-								fontSize: name.length > 18 ? 64 : 76,
+								display: 'flex',
+								flexWrap: 'wrap',
+								maxWidth: 560,
+								fontSize: headlineSize,
 								fontWeight: 800,
 								color: '#0F1B14',
 								lineHeight: 1.04,
-								letterSpacing: -3
+								letterSpacing: headlineSize > 56 ? -3 : -2
 							}}
 						>
-							{`${name} invited you`}
+							{headline}
 						</div>
 						<div
 							style={{
@@ -178,7 +246,7 @@ export default async function handler(req) {
 								lineHeight: 1.35
 							}}
 						>
-							{`See what ${first} is listening to on Spotify, live.`}
+							{`See what ${firstShort} is listening to on Spotify, live.`}
 						</div>
 					</div>
 
@@ -192,11 +260,11 @@ export default async function handler(req) {
 							borderRadius: 9999,
 							background: '#0F1B14',
 							color: '#FCFAF5',
-							fontSize: 26,
+							fontSize: handle && handle.length > 16 ? 21 : 26,
 							fontWeight: 800
 						}}
 					>
-						{profile ? `spotivity.me/@${profile.handle}` : 'spotivity.me'}
+						{handle ? `spotivity.me/@${handle}` : 'spotivity.me'}
 					</div>
 				</div>
 			</div>
@@ -205,6 +273,8 @@ export default async function handler(req) {
 			width: 1200,
 			height: 630,
 			fonts: fonts.length ? fonts : undefined,
+			// Names with emoji render as images instead of empty boxes.
+			emoji: 'twemoji',
 			headers: {
 				'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=604800'
 			}

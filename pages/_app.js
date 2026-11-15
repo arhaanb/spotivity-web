@@ -6,6 +6,7 @@ import SmoothScroll from '../components/SmoothScroll'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import FloatingSupport from '../components/FloatingSupport'
+import InviteLayer from '../components/InviteLayer'
 
 const GA_MEASUREMENT_ID = 'G-CBMMDK6CZ5'
 const SITE_URL = 'https://spotivity.me'
@@ -113,6 +114,7 @@ function MyApp({ Component, pageProps }) {
 					</main>
 					<Footer />
 					<FloatingSupport />
+					<InviteLayer />
 				</div>
 			</SmoothScroll>
 		</>
