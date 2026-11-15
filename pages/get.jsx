@@ -2,21 +2,10 @@ import Head from 'next/head'
 import Logo from '../components/Logo'
 import Container from '../components/ui/Container'
 import StoreButtons from '../components/ui/StoreButtons'
-import { APP_STORE, PLAY_STORE, detectPlatform } from '../lib/invite'
 
 // spotivity.me/get: the one link to share (and what the site's QR codes
-// point at). Phones go straight to their store; desktops see the QR.
-export async function getServerSideProps({ req }) {
-	const platform = detectPlatform(req.headers['user-agent'])
-	if (platform === 'ios') {
-		return { redirect: { destination: APP_STORE, permanent: false } }
-	}
-	if (platform === 'android') {
-		return { redirect: { destination: PLAY_STORE, permanent: false } }
-	}
-	return { props: {} }
-}
-
+// point at). Phones are sent to their store by redirects in next.config.js
+// (no function runs); desktops get this static page with the QR.
 export default function Get() {
 	return (
 		<>
